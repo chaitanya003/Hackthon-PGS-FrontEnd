@@ -57,6 +57,15 @@ const renderActiveShape = (props) => {
 export default class Example extends Component {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
 
+  constructor(props){
+    super(props)
+    this.state = {
+      data:null,
+    }
+  }
+
+
+
   state = {
     activeIndex: 0,
   };
@@ -69,6 +78,7 @@ export default class Example extends Component {
 
   render() {
     return (
+      <center>
       <PieChart width={400} height={400}>
         <Pie
           activeIndex={this.state.activeIndex}
@@ -83,6 +93,7 @@ export default class Example extends Component {
           onMouseEnter={this.onPieEnter}
         />
       </PieChart>
+      </center>
     );
   }
 }
