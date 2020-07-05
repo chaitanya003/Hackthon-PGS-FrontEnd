@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
-
-const data = [
-  { name: 'Yes', value: 400, col:"#6F6" },
-  { name: 'No', value: 100, col:"#F66" },
-];
+import { withRouter} from 'react-router-dom';
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -54,12 +50,26 @@ const renderActiveShape = (props) => {
 };
 
 
-export default class Example extends Component {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
+ class SurveyDonut extends Component {
 
-  state = {
-    activeIndex: 0,
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      data:null,
+      activeIndex:0,
+    }
+  }
+
+
+  componentDidMount(){
+    let response =  {'survey_taken':90,'total':100}
+    let temparr = [{name:"Yes", value:response.survey_taken, col:"#6F6"},
+                  {name:"No", value:response.total - response.survey_taken, col:"#F66"}]
+    this.setState({
+      data: temparr,
+    });
+  }
+
 
   onPieEnter = (data, index) => {
     this.setState({
@@ -67,13 +77,20 @@ export default class Example extends Component {
     });
   };
 
+  handleClick = (data, index) => {
+    this.props.history.push("./survey")
+  };
+  
+
   render() {
     return (
+      
+      <center>
       <PieChart width={400} height={400}>
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
-          data={data}
+          data={this.state.data}
           cx={200}
           cy={200}
           innerRadius={60}
@@ -81,8 +98,11 @@ export default class Example extends Component {
           fill="#8884d8"
           dataKey="value"
           onMouseEnter={this.onPieEnter}
+          onClick={this.handleClick}
         />
       </PieChart>
+      </center>
     );
   }
 }
+export default withRouter(SurveyDonut)
