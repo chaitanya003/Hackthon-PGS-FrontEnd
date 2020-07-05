@@ -195,14 +195,14 @@ export default class allocationPie extends Component {
 					}
 				/>
 
-				<PieChart width={400} height={400}>
+				<PieChart width={800} height={400}>
 					<Pie
 						data={this.state.data}
-						cx={200}
+						cx={400}
 						cy={200}
 						labelLine={false}
 						label={renderCustomizedLabel}
-						outerRadius={80}
+						outerRadius={100}
 						fill="#8884d8"
 						dataKey="value"
 					>
