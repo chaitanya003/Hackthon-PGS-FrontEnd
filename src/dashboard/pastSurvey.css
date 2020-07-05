@@ -1,0 +1,19 @@
+.box {
+    float: left;
+    height: 15px;
+    width: 15px;
+    /* margin-bottom: px; */
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    clear: both;
+  }
+  
+  .red {
+    background-color: #F66;
+  }
+  
+  .purple {
+    background-color: #8884d8;
+  }
+  
