@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BarChart, Bar,  XAxis, YAxis, Tooltip, Legend} from 'recharts';
-import "./pastSurvey.css";
+// import "./pastSurvey.css";
 import {Paper, Typography, Switch} from "@material-ui/core";
 import {withRouter} from "react-router-dom";
 const CustomTooltip = ({ active, payload, label }) => {
@@ -8,8 +8,8 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <Paper style={{width:"200px", height:"85px"}} elevation={5} >
         <center><Typography>{label}</Typography></center>
-        <><div ><div className="box purple"></div><Typography style={{marginLeft:"35px"}}>{`responded : ${payload[0].value}%`}</Typography></div>
-        <div><div className="box red"></div><Typography style={{marginLeft:"35px"}}>{`not responded : ${payload[1].value}%`}</Typography></div>
+        <><Typography style={{marginLeft:"35px", color:"#8884d8"}}>{`responded : ${payload[0].value}%`}</Typography>
+        <Typography style={{marginLeft:"35px", color:"#F66"}}>{`not responded : ${payload[1].value}%`}</Typography>
         </>
         </Paper>
     );
@@ -23,7 +23,7 @@ class PastSurvey extends Component {
         super(props)
         console.log(props.value)
         this.state = {
-                data:props.value[0],
+                data:props.value,
                 checked:true,
         }
   }
@@ -60,7 +60,7 @@ render() {
                 onClick={this.handleClick}
                 >
                 <XAxis type="number" height={50} />
-                <YAxis type="category" dataKey="surveySurveyDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
+                <YAxis type="category" dataKey="surveyEndDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
                 <Legend verticalAlign="bottom"/>
                 <Tooltip position={{ y: -80 }} content={<CustomTooltip />}/>  />
                 <Bar dataKey="percentageOfResponse" stackId="a" fill="#8884d8" />
@@ -89,7 +89,7 @@ render() {
                 onClick={this.handleClick}
               >
               <XAxis type="number" height={50} />
-              <YAxis type="category" dataKey="surveySurveyDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
+              <YAxis type="category" dataKey="surveyEndDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
               <Legend verticalAlign="bottom"/>
               <Tooltip position={{ y: -80 }}  />
               <Bar dataKey="totalNumberOfResponse" stackId="a" fill="#8884d8" />
