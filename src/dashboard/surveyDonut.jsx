@@ -6,7 +6,7 @@ const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
     cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-    fill, payload, percent, value, name, col
+    fill, payload, percent, value, col
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -41,7 +41,7 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${name} : ${value}`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${value}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
         {`(${(percent * 100).toFixed(2)}%)`}
       </text>
@@ -54,21 +54,15 @@ const renderActiveShape = (props) => {
 
   constructor(props){
     super(props);
+    console.log(props.value)
     this.state = {
-      data:null,
+      data:props.value,
       activeIndex:0,
     }
   }
 
 
-  componentDidMount(){
-    let response =  {'survey_taken':90,'total':100}
-    let temparr = [{name:"Yes", value:response.survey_taken, col:"#6F6"},
-                  {name:"No", value:response.total - response.survey_taken, col:"#F66"}]
-    this.setState({
-      data: temparr,
-    });
-  }
+
 
 
   onPieEnter = (data, index) => {
@@ -86,13 +80,13 @@ const renderActiveShape = (props) => {
     return (
       
       <center>
-      <PieChart width={400} height={400}>
+      <PieChart width={400} height={400} margin={{ top: 30, right: 30, left: 30, bottom: 30 }} >
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
           data={this.state.data}
-          cx={200}
-          cy={200}
+          cx={170}
+          cy={150}
           innerRadius={60}
           outerRadius={80}
           fill="#8884d8"

@@ -1,8 +1,7 @@
 import React from 'react';
 import {Button, Grid, Card, CardContent, Typography} from '@material-ui/core'
-import Donut from './dashboard/surveyDonut'
-import PastSurvey from './dashboard/pastSurvey'
-import Allocation from './dashboard/allocationPie'
+// import Allocation from './dashboard/allocationPie'
+import Survey from './dashboard/surveyGraphs';
 import {Link} from 'react-router-dom'
 class App extends React.Component {
 
@@ -14,7 +13,7 @@ class App extends React.Component {
             <Card variant ="outlined" >
               <CardContent>
                 <Typography variant = "h4">Allocation</Typography>
-                <Allocation/>
+                {/* <Allocation/> */}
               </CardContent>
             </Card>
           </Grid>
@@ -36,14 +35,7 @@ class App extends React.Component {
           </Grid>
           <Card variant ="outlined">
             <CardContent>
-            <Grid item >
-              <Typography variant="h4">Current Survey Status</Typography>
-              <Donut/>
-            </Grid>
-            <Grid item>
-            <Typography variant="h4">Past Surveys Turnout</Typography>
-              <PastSurvey />
-            </Grid>
+              <Survey/>
             </CardContent>
           </Card>  
           </Grid>
