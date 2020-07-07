@@ -140,7 +140,7 @@ export default class allocationPie extends Component {
 		let apiUrl
 		let response
 		if (buName) {
-			apiUrl = ' /asset/allocation?bu=buName';
+			apiUrl = '/asset/allocation?bu=' + buName;
 			response = axios.get(apiUrl);
 			// if (buName === 'Computer Department') {
 			// 	response = dummyData['buAssetAllocation1']
