@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { PieChart, Pie, Sector, Cell } from 'recharts';
+import { PieChart, Pie, Sector, Cell, Legend, ResponsiveContainer } from 'recharts';
+import { Button, Grid, Card, CardContent, Typography, Divider } from '@material-ui/core';
 import HSBar from "react-horizontal-stacked-bar-chart";
 //import axios from 'axios';
 let dummyData = {
@@ -101,7 +102,7 @@ let dummyData = {
 	}
 }
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#004051', '#00325F'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -178,7 +179,7 @@ export default class allocationPie extends Component {
 		return (
 			<div>
 
-				<HSBar
+				{/* <HSBar
 					showTextDown
 					outlineWidth= {0.5}
 					id="hsbarExample"
@@ -193,12 +194,37 @@ export default class allocationPie extends Component {
 						this.onChangeBar(e.bar.name);
 					}
 					}
-				/>
-
+				/> */}
 				<PieChart width={800} height={400}>
+					
+					<Pie
+						data={this.request()}
+						cx={350}
+						cy={200}
+						labelLine={false}
+						label={renderCustomizedLabel}
+						outerRadius={100}
+						fill="#8884d8"
+						dataKey="value"
+						onClick={e => {
+							// this.setState(state => ({
+							// 	...state,
+							// 	value: e.bar.value
+							// }))
+							this.onChangeBar(e.name);
+						}
+						}
+					>
+						{
+							this.state.data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+						}
+
+					</Pie>
+					<Legend align='left' verticalAlign="top"/>
+
 					<Pie
 						data={this.state.data}
-						cx={400}
+						cx={650}
 						cy={200}
 						labelLine={false}
 						label={renderCustomizedLabel}
@@ -210,6 +236,8 @@ export default class allocationPie extends Component {
 							this.state.data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
 						}
 					</Pie>
+					<Legend align='right' verticalAlign="bottom"/>
+			
 				</PieChart>
 			</div>
 
