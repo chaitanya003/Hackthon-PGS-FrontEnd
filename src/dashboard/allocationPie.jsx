@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PieChart, Pie, Sector, Cell, Legend, ResponsiveContainer } from 'recharts';
 import { Button, Grid, Card, CardContent, Typography, Divider } from '@material-ui/core';
 import HSBar from "react-horizontal-stacked-bar-chart";
-//import axios from 'axios';
+import axios from 'axios';
 let dummyData = {
 	"assetAllocation": {
 		"responseData": {
@@ -140,21 +140,21 @@ export default class allocationPie extends Component {
 		let apiUrl
 		let response
 		if (buName) {
-			apiUrl = 'https://api.github.com/getBUAssetAllocation';
-			//response = await axios.get(apiUrl, { BU_Name: buName });
-			if (buName === 'Computer Department') {
-				response = dummyData['buAssetAllocation1']
-			}
-			if (buName === 'Electronics Department') {
-				response = dummyData['buAssetAllocation2']
-			}
-			if (buName === 'Production Department') {
-				response = dummyData['buAssetAllocation3']
-			}
+			apiUrl = ' /asset/allocation?bu=buName';
+			response = axios.get(apiUrl);
+			// if (buName === 'Computer Department') {
+			// 	response = dummyData['buAssetAllocation1']
+			// }
+			// if (buName === 'Electronics Department') {
+			// 	response = dummyData['buAssetAllocation2']
+			// }
+			// if (buName === 'Production Department') {
+			// 	response = dummyData['buAssetAllocation3']
+			// }
 		} else {
-			apiUrl = 'https://api.github.com/getAssetAllocation';
-			//response = await axios.get(apiUrl);
-			response = dummyData['assetAllocation']
+			apiUrl = '/asset/allocation';
+			response = axios.get(apiUrl);
+			//response = dummyData['assetAllocation']
 		}
 		let data = []
 		for (let i in response.responseData.allocationDetails) {
