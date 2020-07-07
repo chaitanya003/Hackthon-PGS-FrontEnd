@@ -33,7 +33,7 @@ class Survey extends React.Component{
 
     render(){
         if (this.state.loading === true) {
-            return <LinearProgress color="Secondary"/>;
+            return <LinearProgress color="secondary"/>;
         }
         return(
             <>

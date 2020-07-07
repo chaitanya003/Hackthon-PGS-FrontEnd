@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BarChart, Bar,  XAxis, YAxis, Tooltip, Legend} from 'recharts';
-// import "./pastSurvey.css";
 import {Paper, Typography, Switch} from "@material-ui/core";
 import {withRouter} from "react-router-dom";
 const CustomTooltip = ({ active, payload, label }) => {

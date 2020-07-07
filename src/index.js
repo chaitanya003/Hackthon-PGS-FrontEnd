@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Survey from './Survey';
-import AssetIP from './AssetIP';
-import AssetNonIP from './AssetNonIP';
+import Survey from './components/Survey';
+import AssetStore from './components/AssetStore';
 import * as serviceWorker from './serviceWorker';
 import {Switch,Route, BrowserRouter as Router} from 'react-router-dom'
 const routing = (
@@ -12,9 +11,7 @@ const routing = (
     <Switch>
       <Route exact path="/" component={App}/>
       <Route exact path="/survey" component={Survey}/>
-      <Route exact path="/asset/IP" component={AssetIP}/>
-      <Route exact path="/asset/NonIP" component={AssetNonIP}/>
-      <Route exact path="/survey" component={AssetNonIP}/>
+      <Route exact path="/asset" component={AssetStore}/>
     </Switch>
   </Router>
 )
