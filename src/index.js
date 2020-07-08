@@ -10,8 +10,8 @@ const routing = (
   <Router>
     <Switch>
       <Route exact path="/" component={App}/>
-      <Route exact path="/survey" component={Survey}/>
-      <Route exact path="/asset" component={AssetStore}/>
+      <Route exact path="/survey/:survey_id" component={Survey}/>
+      <Route exact path="/asset/:store" component={AssetStore}/>
     </Switch>
   </Router>
 )

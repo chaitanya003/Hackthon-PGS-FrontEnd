@@ -1,48 +1,96 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
-import { TablePagination } from '@material-ui/core';
+import {  Typography, LinearProgress } from '@material-ui/core';
 import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
-
-
- 
-const data = [{ assetid: 1, name: 'HP Pavillion', serial_no: 1982, status: 'Dispatched' },
-{ assetid: 4, name: 'HP Pavillion', serial_no: 1682, status: 'Dispatched' }
-];
+import axios from 'axios';
+import Navbar from './navbar';
 const columns = [
   {
-    name: 'Asset Name',
-    selector: 'name',
+    name: 'Asset Id',
+    selector: 'assetId',
     sortable: true,
-    right: true,
-  },
-  {
-    name: 'asset_id',
-    selector: 'assetid',
-    sortable: true,
-    right: true,
   },
   {
     name: 'Serial Number',
-    selector: 'serial_no',
+    selector: 'serialNumber',
     sortable: true,
+  },
+  {
+    name: 'Asset Name',
+    selector: 'assetName',
+    sortable: true,
+    right: true,
   },
   {
     name: 'Status',
     selector: 'status',
     sortable: true,
     right: true,
+    conditionalCellStyles: [
+      {
+        when: row => row.status === "Allotted",
+        style: {
+          color: '#008800',
+        },
+      },
+      {
+        when: row => row.status === "Unallotted",
+        style: {
+          color: '#F66',
+        },
+      },
+    ],
   },
 ];
 
-export default class AssetStore extends React.Component {
+
+ class AssetStore extends React.Component {
+
+    constructor(props){
+      super(props);
+      this.state = {
+        data:null,
+        title:"",
+        loading:true,
+      }
+    }
+
+    componentDidMount(){
+      let apiURl = '/asset/allocation/store?store=' + this.props.match.params.store 
+      axios.get(apiURl)
+        .then((res) =>{
+          let title = null
+          if(this.props.match.params.store == 1){
+            title = <Typography variant="h5">Asset Store - IP Devices</Typography>
+          }
+          else{
+            title = <Typography variant="h5">"Asset Store - Non IP Devices"</Typography>
+          }
+          this.setState({
+            data:res.data.assets,
+            title:title,
+            loading:false,
+          })
+        })
+        .catch((err) =>{
+            console.log("Error")
+        })
+    }
+
+
     render(){
+      if(this.state.loading === true){
+        return <LinearProgress/>
+      }
         return (
-            <div>
-              <Card>
+            <div style={{backgroundColor:"#eeeeee"}}> 
+            <Navbar/>
+            <Card style={{margin:"70px"}} elevation={10}>
             <DataTable
+              title={this.state.title}
               columns={columns}
-              data={data}
+              data={this.state.data}
               sortIcon={<SortIcon />}
               pagination
             />
@@ -51,3 +99,4 @@ export default class AssetStore extends React.Component {
           )
     }
 }
+export default AssetStore;

@@ -72,7 +72,8 @@ const renderActiveShape = (props) => {
   };
 
   handleClick = (data, index) => {
-    this.props.history.push("./survey")
+    let url = "/survey/" + this.props.Id
+    this.props.history.push(url)
   };
   
 

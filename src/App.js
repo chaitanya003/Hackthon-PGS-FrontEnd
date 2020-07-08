@@ -32,7 +32,7 @@ class App extends React.Component {
         <Grid item >
             <Card variant ="outlined">
               <CardContent>
-                <Typography variant="h6">Asset Store  <Link to="/asset" style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="contained" color="primary">IP Devices</Button></Link> <Link to="/asset" style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="contained" color="secondary">Non IP Devices</Button></Link></Typography>
+                <Typography variant="h6">Asset Store  <Link to="/asset/1" style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="contained" color="primary">IP Devices</Button></Link> <Link to="/asset/2" style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="contained" color="secondary">Non IP Devices</Button></Link></Typography>
             </CardContent>
             </Card>
           </Grid>

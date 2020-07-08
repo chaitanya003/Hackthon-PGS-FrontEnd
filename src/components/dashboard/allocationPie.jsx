@@ -96,7 +96,7 @@ export default class allocationPie extends Component {
         }
 		return (
 			<div style={{display:"flex", flexDirection:"row"}}>
-				<PieChart width={430} height={400}>
+				<PieChart width={400} height={400}>
 					<Pie
 						data={this.state.data}
 						cx={150}

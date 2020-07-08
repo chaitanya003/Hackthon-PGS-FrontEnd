@@ -29,8 +29,9 @@ class PastSurvey extends Component {
 
 
   handleClick = (data, index) => {
-    this.props.history.push("./survey")
-  };
+    let url = "/survey/" + data.activePayload[0].payload.surveyId
+    this.props.history.push(url)
+  };  
 
   handleChange = (event) => {
     this.setState({
