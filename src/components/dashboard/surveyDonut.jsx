@@ -89,7 +89,7 @@ const renderActiveShape = (props) => {
           cy={150}
           innerRadius={60}
           outerRadius={80}
-          fill="#8884d8"
+          fill="#03a9f4"
           dataKey="value"
           onMouseEnter={this.onPieEnter}
           onClick={this.handleClick}

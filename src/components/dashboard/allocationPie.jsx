@@ -118,7 +118,7 @@ export default class allocationPie extends Component {
 
 					</Pie>
 					<Tooltip />
-					<Legend layout="horizontal" align='left' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
+					<Legend layout="vertical" align='left' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
 				</PieChart>
 				<PieChart width={400} height={400}>
 					<Pie
@@ -136,7 +136,7 @@ export default class allocationPie extends Component {
 						}
 					</Pie>
 					<Tooltip />
-					<Legend layout="horizontal" align='right' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
+					<Legend layout="vertical" align='right' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
 				</PieChart>
 			</div>
 

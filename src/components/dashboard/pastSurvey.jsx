@@ -91,8 +91,8 @@ render() {
               <YAxis type="category" dataKey="surveyStartDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
               <Legend verticalAlign="bottom"/>
               <Tooltip position={{ y: -80 }}  />
-              <Bar dataKey="totalNumberOfResponse" stackId="a" fill="#8884d8" />
-              <Bar dataKey="totalNumberOfNonResponse" stackId="a" fill="#F66" />
+              <Bar dataKey="totalNumberOfResponse" stackId="a" fill="#03a9f4" />
+              <Bar dataKey="totalNumberOfNonResponse" stackId="a" fill="#ff9800" />
               </BarChart>
               </>
               )
