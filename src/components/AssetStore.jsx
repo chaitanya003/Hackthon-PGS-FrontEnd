@@ -20,7 +20,6 @@ const columns = [
     name: 'Asset Name',
     selector: 'assetName',
     sortable: true,
-    right: true,
   },
   {
     name: 'Status',
@@ -84,7 +83,7 @@ class AssetStore extends React.Component {
       return <LinearProgress />
     }
     return (
-      <div style={{ backgroundColor: "#eeeeee" }}>
+      <div style={{ backgroundColor: "#e1f5fe" }}>
         <Navbar />
         <Card style={{ margin: "70px" }} elevation={10}>
           <DataTable

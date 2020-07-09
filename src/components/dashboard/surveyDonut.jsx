@@ -41,8 +41,8 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${value}`}</text>
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#1976d2">{`${value}`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#388e3c">
         {`(${(percent * 100).toFixed(2)}%)`}
       </text>
     </g>
@@ -89,7 +89,7 @@ const renderActiveShape = (props) => {
           cy={150}
           innerRadius={60}
           outerRadius={80}
-          fill="#03a9f4"
+          fill="#0d47a1"
           dataKey="value"
           onMouseEnter={this.onPieEnter}
           onClick={this.handleClick}

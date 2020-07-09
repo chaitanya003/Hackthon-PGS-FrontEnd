@@ -7,8 +7,8 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <Paper style={{width:"200px", height:"85px"}} elevation={5} >
         <center><Typography>{label}</Typography></center>
-        <><Typography style={{marginLeft:"35px", color:"#8884d8"}}>{`responded : ${payload[0].value}%`}</Typography>
-        <Typography style={{marginLeft:"35px", color:"#F66"}}>{`not responded : ${payload[1].value}%`}</Typography>
+        <><Typography style={{marginLeft:"35px", color:"#1976d2"}}>{`responded : ${payload[0].value}%`}</Typography>
+        <Typography style={{marginLeft:"35px", color:"#388e3c"}}>{`not responded : ${payload[1].value}%`}</Typography>
         </>
         </Paper>
     );
@@ -62,8 +62,8 @@ render() {
                 <YAxis type="category" dataKey="surveyEndDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
                 <Legend verticalAlign="bottom"/>
                 <Tooltip position={{ y: -80 }} content={<CustomTooltip />}/>  />
-                <Bar dataKey="percentageOfResponse" stackId="a" fill="#8884d8" />
-                <Bar dataKey="percentageOfNonResponse" stackId="a" fill="#F66" />
+                <Bar dataKey="percentageOfResponse" stackId="a" fill="#1976d2" />
+                <Bar dataKey="percentageOfNonResponse" stackId="a" fill="#388e3c" />
                 </BarChart>
               </>
               )
@@ -91,8 +91,8 @@ render() {
               <YAxis type="category" dataKey="surveyStartDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
               <Legend verticalAlign="bottom"/>
               <Tooltip position={{ y: -80 }}  />
-              <Bar dataKey="totalNumberOfResponse" stackId="a" fill="#03a9f4" />
-              <Bar dataKey="totalNumberOfNonResponse" stackId="a" fill="#ff9800" />
+              <Bar dataKey="totalNumberOfResponse" stackId="a" fill="#1976d2" />
+              <Bar dataKey="totalNumberOfNonResponse" stackId="a" fill="#388e3c" />
               </BarChart>
               </>
               )

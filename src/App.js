@@ -18,7 +18,7 @@ class App extends React.Component {
 
     const store=createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
     return (
-      <div style={{ backgroundColor: "#eee" }}>
+      <div style={{ backgroundColor: "#e1f5fe" }}>
           <Navbar />
           <Grid container style={{ marginTop: "30px" }} spacing={2}>
             <Grid item xs={8} container direction="column" spacing={2}>
@@ -33,7 +33,7 @@ class App extends React.Component {
               <Grid item>
                 <Card variant="outlined">
                   <CardContent>
-                    <Typography variant="h4">Fault Tolerance</Typography>
+                    <Typography variant="h4"><FeedbackIcon/> Fault Ratio</Typography>
                     <Provider store={store}>
                       <FaultGraph />
                     </Provider>
