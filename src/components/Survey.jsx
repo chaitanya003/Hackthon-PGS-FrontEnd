@@ -128,7 +128,7 @@ const columns = [
             <div style={{backgroundColor:"#eeeeee"}}> 
             <Navbar/>
             <Card style={{margin:"70px"}} elevation={10}>
-            <Button  style={{float:"right", margin:"10px"}} color="primary" variant="contained" onClick={this.downloadCSV}>Export</Button>
+            <Button  style={{float:"right", margin:"10px", backgroundColor:"#1976d2", color:"white"}}  variant="contained" onClick={this.downloadCSV}>Export</Button>
             <DataTable
               title={this.state.title}
               columns={columns}

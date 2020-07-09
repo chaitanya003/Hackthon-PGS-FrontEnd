@@ -130,7 +130,7 @@ function Graph() {
                     </Select>
                 </FormControl>
 
-                <Button  style={{ maxHeight: '30px', minHeight: '30px'}} className={classes.formControl} color = "primary" variant="contained" onClick={async () => {
+                <Button  style={{ maxHeight: '30px', minHeight: '30px', backgroundColor:"#1976d2", color:"white"}} className={classes.formControl}  variant="contained" onClick={async () => {
                     await arr.map((props) => {
                         if (entries.includes(props) === true)
                             entryValues.push(BU.get(props));
@@ -196,7 +196,7 @@ function Graph() {
                     const response = await axios.get(uri);
                     dispatch(setData({payload: response.data.faultDetails}))
                     history.push('/faultdetails');
-                }} stackId={'a'} dataKey="unitsAllocated" fill="#8884d8" barSize={30}/>
+                }} stackId={'a'} dataKey="unitsAllocated" fill="#1976d2" barSize={30}/>
                 <Bar onClick={async (e) => {
                     let start, end, year;
                     let str1 = (e.label).split('-')
@@ -223,7 +223,7 @@ function Graph() {
                     dispatch(setData({payload: response.data.faultDetails}))
                     history.push('/faultdetails');
                 }}
-                        dataKey="faultyUnits" fill="red" barSize={30}/>
+                        dataKey="faultyUnits" fill="#388e3c" barSize={30}/>
             </BarChart>
         </Row>
 

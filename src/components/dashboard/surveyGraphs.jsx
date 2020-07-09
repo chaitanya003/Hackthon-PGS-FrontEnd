@@ -3,6 +3,7 @@ import Donut from './surveyDonut';
 import PastSurvey from './pastSurvey';
 import {Grid, Typography, LinearProgress} from '@material-ui/core';
 import axios from 'axios';
+import RateReviewIcon from '@material-ui/icons/RateReview';
 
 class Survey extends React.Component{
     constructor(props){
@@ -42,11 +43,11 @@ class Survey extends React.Component{
         return(
             <>
             <Grid item >
-                <Typography variant="h4">Current Survey Status</Typography>
+                <Typography variant="h4"><RateReviewIcon/> Current Survey Status</Typography>
                 <Donut value = {this.state.donutData} Id = {this.state.currentSurveyID} date = {this.state.currentSurveyDate}/>
             </Grid>
             <Grid item>
-                <Typography variant="h4">Past Surveys Turnout</Typography>
+                <Typography variant="h4"><RateReviewIcon/> Past Surveys Turnout</Typography>
                 <PastSurvey  value = {this.state.pastData}/>
             </Grid>
             </>

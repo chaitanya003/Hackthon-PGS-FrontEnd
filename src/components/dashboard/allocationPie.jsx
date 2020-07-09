@@ -28,15 +28,15 @@ export default class allocationPie extends Component {
 		super(props);
 		this.onChangeSector = this.onChangeSector.bind(this);
 		this.state = {
-			data: '',
-			subdata: '',
+			data: props.value,
+			subdata: null,
 			loading: true,
 		};
 
 	};
 
 	componentDidMount() {
-		this.request()
+		// this.request()
 
 	}
 
@@ -63,26 +63,26 @@ export default class allocationPie extends Component {
 					console.log("Error")
 				})
 		} else {
-			apiUrl = '/asset/allocation';
-			axios.get(apiUrl)
-				.then((response) => {
-					let data = []
-					for (let i in response.data.assets[0].allocation) {
-						let item = {}
-						item.id = response.data.assets[0].allocation[i].buId
-						item.name = response.data.assets[0].allocation[i].buName
-						item.value = response.data.assets[0].allocation[i].unitsAllocation
-						data.push(item)
-					}
-					this.setState({
-						data: data,
-						subdata: data,
-						loading: false,
-					})
-				})
-				.catch((err) => {
-					console.log("Error")
-				})
+			// apiUrl = '/asset/allocation';
+			// axios.get(apiUrl)
+			// 	.then((response) => {
+			// 		let data = []
+			// 		for (let i in response.data.assets[0].allocation) {
+			// 			let item = {}
+			// 			item.id = response.data.assets[0].allocation[i].buId
+			// 			item.name = response.data.assets[0].allocation[i].buName
+			// 			item.value = response.data.assets[0].allocation[i].unitsAllocation
+			// 			data.push(item)
+			// 		}
+			// 		this.setState({
+			// 			data: data,
+			// 			subdata: data,
+			// 			loading: false,
+			// 		})
+			// 	})
+			// 	.catch((err) => {
+			// 		console.log("Error")
+			// 	})
 
 		}
 	}
@@ -92,9 +92,9 @@ export default class allocationPie extends Component {
 	};
 
 	render() {
-		if (this.state.loading === true) {
-			return <LinearProgress color="secondary" />;
-		}
+		// if (this.state.loading === true) {
+		// 	return <LinearProgress color="secondary" />;
+		// }
 		return (
 			<div style={{ display: "flex", flexDirection: "row" }}>
 				<PieChart width={400} height={400}>
@@ -120,6 +120,7 @@ export default class allocationPie extends Component {
 					<Tooltip />
 					<Legend  iconType="wye" layout="vertical" align='left' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
 				</PieChart>
+				{this.state.subdata !== null &&
 				<PieChart width={400} height={400}>
 					<Pie
 						data={this.state.subdata}
@@ -138,6 +139,7 @@ export default class allocationPie extends Component {
 					<Tooltip />
 					<Legend iconType="wye" layout="vertical" align='right' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
 				</PieChart>
+				}
 			</div>
 
 		);

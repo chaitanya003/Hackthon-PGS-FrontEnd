@@ -43,7 +43,7 @@ render() {
       return(<>
               <Typography variant = "subtitle1" style={{float:"left"}}>Percentage Wise Distribution</Typography>
               <Switch
-                style={{float:"left"}}
+                style={{float:"left", color:"#1976d2"}}
                 checked={this.state.checked}
                 onChange={this.handleChange}
                 color="primary"

@@ -5,7 +5,7 @@ class Navbar extends React.Component{
 
 render(){
     return(
-        <AppBar position="static">
+        <AppBar position="static" style={{backgroundColor:"#1976d2"}}>
         <Toolbar>
         <NavLink to ="/" style={{ color: 'inherit', textDecoration: 'inherit'}} ><IconButton edge="start" color="inherit" aria-label="menu">
                 PGS
