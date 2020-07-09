@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "react": "^16.13.1",
+    "react-animated-bg": "^1.1.2",
     "react-data-table-component": "^6.9.6",
     "react-dom": "^16.13.1",
     "react-horizontal-stacked-bar-chart": "^8.15.2",
