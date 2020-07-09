@@ -54,7 +54,6 @@ const renderActiveShape = (props) => {
 
   constructor(props){
     super(props);
-    console.log(props.value)
     this.state = {
       data:props.value,
       activeIndex:0,
@@ -72,7 +71,7 @@ const renderActiveShape = (props) => {
   };
 
   handleClick = (data, index) => {
-    let url = "/survey/" + this.props.Id
+    let url = "/survey/" + this.props.Id + "/" + this.props.date
     this.props.history.push(url)
   };
   
