@@ -3,7 +3,8 @@ import { PieChart, Pie,  Cell, Legend, Tooltip, } from 'recharts';
 import {  LinearProgress } from '@material-ui/core';
 import axios from 'axios';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#004051', '#00325F'];
+const COLORS1 = ['#e1f5fe', '#b3e5fc', '#81d4fa', '#4fc3f7', '#29b6f6', '#03a9f4'];
+const COLORS2 = ['#fff3e0', '#ffe0b2', '#ffcc80', '#ffb74d', '#ffa726', '#ff9800'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -112,7 +113,7 @@ export default class allocationPie extends Component {
 						}
 					>
 						{
-							this.state.data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+							this.state.data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS1[index % COLORS1.length]} />)
 						}
 
 					</Pie>
@@ -131,7 +132,7 @@ export default class allocationPie extends Component {
 						dataKey="value"
 					>
 						{
-							this.state.subdata.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+							this.state.subdata.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS2[index % COLORS2.length]} />)
 						}
 					</Pie>
 					<Tooltip/>
