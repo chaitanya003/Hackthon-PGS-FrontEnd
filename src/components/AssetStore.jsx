@@ -65,7 +65,7 @@ class AssetStore extends React.Component {
           title = <Typography variant="h5">Asset Store - IP Devices</Typography>
         }
         else {
-          title = <Typography variant="h5">"Asset Store - Non IP Devices"</Typography>
+          title = <Typography variant="h5">Asset Store - Non IP Devices</Typography>
         }
         this.setState({
           data: res.data.assets,

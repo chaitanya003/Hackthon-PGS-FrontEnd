@@ -5,6 +5,8 @@ import "reactstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles.css';
 import "bootstrap";
+import Navbar from './components/navbar'
+import {Card} from '@material-ui/core'
 
 function DataDetails() {
 
@@ -55,21 +57,19 @@ function DataDetails() {
     //     author: "Gautam"
     // }]
 const data=details;
-
+    console.log(data)
     return (
-        <div className={"App"}>
-            <div className={"card"}>
+        <div style={{backgroundColor:"#eeeeee"}}> 
+            <Navbar/>
+            <Card style={{margin:"70px"}} elevation={10}>
                 <DataTable
-                    title={"Details"}
+                    title={" Fault Details"}
                     columns={columns}
                     data={data}
                     pagination
                     defaultSortField={'title'}
                 />
-
-
-            </div>
-
+            </Card>
         </div>
 
     )

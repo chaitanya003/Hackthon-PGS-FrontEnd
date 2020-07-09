@@ -4,14 +4,23 @@ import './index.css';
 import App from './App';
 import Survey from './components/Survey';
 import AssetStore from './components/AssetStore';
+import FaultDetail from './DataDetails';
 import * as serviceWorker from './serviceWorker';
 import {Switch,Route, BrowserRouter as Router} from 'react-router-dom'
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import allReducers from "./reducers";
+
+const  store=createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 const routing = (
   <Router>
     <Switch>
       <Route exact path="/" component={App}/>
       <Route exact path="/survey/:id/:date" component={Survey}/>
       <Route exact path="/asset/:store" component={AssetStore}/>
+      <Provider store={store}>
+        <Route exact path="/faultdetails" component={FaultDetail}/>
+      </Provider>
     </Switch>
   </Router>
 )

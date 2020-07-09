@@ -4,23 +4,21 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import StoreIcon from '@material-ui/icons/Store';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import RateReviewIcon from '@material-ui/icons/RateReview';
-import AnimatedBg from "react-animated-bg";
 import Navbar from './components/navbar'
 import Allocation from './components/dashboard/allocationPie'
 import Survey from './components/dashboard/surveyGraphs';
 import { Link } from 'react-router-dom'
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import allReducers from "./reducers";
+import FaultGraph from "./Graph";
 class App extends React.Component {
 
   render() {
+
+    const store=createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
     return (
       <div style={{ backgroundColor: "#eee" }}>
-        <AnimatedBg
-          colors={["#fafafa", "#f5f5f5", "#eeeeee", "#e0e0e0", "#bdbdbd", "#9e9e9e"]}
-          duration={1.5}
-          delay={0}
-          timingFunction="ease-out"
-          className="animated-section"
-        >
           <Navbar />
           <Grid container style={{ marginTop: "30px" }} spacing={2}>
             <Grid item xs={8} container direction="column" spacing={2}>
@@ -36,6 +34,9 @@ class App extends React.Component {
                 <Card variant="outlined">
                   <CardContent>
                     <Typography variant="h4">Fault Tolerance</Typography>
+                    <Provider store={store}>
+                      <FaultGraph />
+                    </Provider>
                   </CardContent>
                 </Card>
               </Grid>
@@ -55,7 +56,6 @@ class App extends React.Component {
               </Card>
             </Grid>
           </Grid>
-        </AnimatedBg>
       </div>
     );
   }
