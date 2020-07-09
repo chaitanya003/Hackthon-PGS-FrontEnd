@@ -3,8 +3,8 @@ import { PieChart, Pie, Cell, Legend, Tooltip, } from 'recharts';
 import { LinearProgress } from '@material-ui/core';
 import axios from 'axios';
 
-const COLORS1 = ['#e1f5fe', '#b3e5fc', '#81d4fa', '#4fc3f7', '#29b6f6', '#03a9f4'];
-const COLORS2 = ['#fff3e0', '#ffe0b2', '#ffcc80', '#ffb74d', '#ffa726', '#ff9800'];
+const COLORS1 = ['#90caf9', '#64b5f6', '#42a5f5', '#2196f3','#1e88e5','#1976d2','#1565c0','#0d47a1'];
+const COLORS2 = ['#a5d6a7', '#81c784', '#66bb6a', '#4caf50', '#43a047', '#388e3c','#2e7d32','#1b5e20'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -104,7 +104,7 @@ export default class allocationPie extends Component {
 						cy={150}
 						labelLine={false}
 						label={renderCustomizedLabel}
-						outerRadius={100}
+						outerRadius={110}
 						fill="#8884d8"
 						dataKey="value"
 						onClick={e => {
@@ -118,7 +118,7 @@ export default class allocationPie extends Component {
 
 					</Pie>
 					<Tooltip />
-					<Legend layout="vertical" align='left' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
+					<Legend  iconType="wye" layout="vertical" align='left' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
 				</PieChart>
 				<PieChart width={400} height={400}>
 					<Pie
@@ -127,7 +127,7 @@ export default class allocationPie extends Component {
 						cy={150}
 						labelLine={false}
 						label={renderCustomizedLabel}
-						outerRadius={100}
+						outerRadius={110}
 						fill="#8884d8"
 						dataKey="value"
 					>
@@ -136,7 +136,7 @@ export default class allocationPie extends Component {
 						}
 					</Pie>
 					<Tooltip />
-					<Legend layout="vertical" align='right' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
+					<Legend iconType="wye" layout="vertical" align='right' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
 				</PieChart>
 			</div>
 

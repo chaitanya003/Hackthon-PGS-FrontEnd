@@ -13,14 +13,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{ backgroundColor: "#eee" }}>
-        <AnimatedBg
-          colors={["#fafafa", "#f5f5f5", "#eeeeee", "#e0e0e0", "#bdbdbd", "#9e9e9e"]}
-          duration={1.5}
-          delay={0}
-          timingFunction="ease-out"
-          className="animated-section"
-        >
+      <div style={{ backgroundColor: "#e1f5fe" }}>
           <Navbar />
           <Grid container style={{ marginTop: "30px" }} spacing={2}>
             <Grid item xs={8} container direction="column" spacing={2}>
@@ -35,7 +28,7 @@ class App extends React.Component {
               <Grid item>
                 <Card variant="outlined">
                   <CardContent>
-                    <Typography variant="h4">Fault Tolerance</Typography>
+                    <Typography variant="h4"><FeedbackIcon/> Fault Ratio</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -55,7 +48,6 @@ class App extends React.Component {
               </Card>
             </Grid>
           </Grid>
-        </AnimatedBg>
       </div>
     );
   }
