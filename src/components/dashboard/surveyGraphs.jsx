@@ -9,6 +9,7 @@ class Survey extends React.Component{
         super(props);
         this.state = {
             currentSurveyID:null,
+            currentSurveyDate:null,
             data:null,
             loading:true,
         }
@@ -18,12 +19,12 @@ class Survey extends React.Component{
 
         axios.get('/asset/allocation/survey')
             .then((res) =>{
-                console.log(res)
                 let Donutarr = [{name:"Responded", value:res.data[3].totalNumberOfResponse, col:"#6F6"},
                    {name:"Not responded", value:res.data[3].totalNumberOfNonResponse, col:"#F66"}]
                 let Pastarr = res.data.slice(0,3).reverse()
                 this.setState({
                     currentSurveyID:res.data[3].surveyId,
+                    currentSurveyDate:res.data[3].surveyStartDate,
                     donutData:Donutarr,
                     pastData:Pastarr,
                     loading:false,
@@ -42,7 +43,7 @@ class Survey extends React.Component{
             <>
             <Grid item >
                 <Typography variant="h4">Current Survey Status</Typography>
-                <Donut value = {this.state.donutData} Id = {this.state.currentSurveyID}/>
+                <Donut value = {this.state.donutData} Id = {this.state.currentSurveyID} date = {this.state.currentSurveyDate}/>
             </Grid>
             <Grid item>
                 <Typography variant="h4">Past Surveys Turnout</Typography>

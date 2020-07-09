@@ -18,7 +18,7 @@ const columns = [
   },
   {
     name: 'Serial Number',
-    selector: 'serialNumber',
+    selector: 'serialNo',
     sortable: true,
   },
   {
@@ -49,8 +49,9 @@ const columns = [
     constructor(props){
       super(props);
       this.state = {
-        data:[{assetId:1, assetType:"Laptop", assetName:"HP Pavilion", serialNumber:12345, employeeName:"Hemant Pardeshi", employeeEmail:"hmnt@gmail.com"},{assetId:2, assetType:"Laptop", assetName:"HP Pavilion", serialNumber:12345, employeeName:"Hemant Pardeshi", employeeEmail:"hmnt@gmail.com"}],
-        title:<Typography variant="h5">Survey</Typography>,
+        data:null,
+        title:"",
+        loading:true,
       }
       this.convertArrayOfObjectsToCSV = this.convertArrayOfObjectsToCSV.bind(this);
       this.downloadCSV = this.downloadCSV.bind(this);
@@ -59,25 +60,21 @@ const columns = [
     
 
     componentDidMount(){
-    //   let apiURl = '/asset/allocation/store?store=' + this.props.match.params.store 
-    //   axios.get(apiURl)
-    //     .then((res) =>{
-    //       let title = null
-    //       if(this.props.match.params.store == 1){
-    //         title = <Typography variant="h5">Asset Store - IP Devices</Typography>
-    //       }
-    //       else{
-    //         title = <Typography variant="h5">"Asset Store - Non IP Devices"</Typography>
-    //       }
-    //       this.setState({
-    //         data:res.data.assets,
-    //         title:title,
-    //         loading:false,
-    //       })
-    //     })
-    //     .catch((err) =>{
-    //         console.log("Error")
-    //     })
+      let apiURl = '/asset/allocation/survey/details?id=' + this.props.match.params.id 
+      axios.get(apiURl)
+        .then((res) =>{
+          let title = null
+          title="XYZ"
+          title = <Typography variant = "h5">Survey {this.props.match.params.date}</Typography>
+          this.setState({
+            data:res.data.survey,
+            title:title,
+            loading:false,
+          })
+        })
+        .catch((err) =>{
+            console.log("Error")
+        })
     }
 
     convertArrayOfObjectsToCSV = (array) => {
@@ -106,13 +103,12 @@ const columns = [
         return result;
       }
       
-      // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
       downloadCSV() {
         const link = document.createElement('a');
         let csv = this.convertArrayOfObjectsToCSV(this.state.data);
         if (csv == null) return;
       
-        const filename = 'export.csv';
+        const filename = 'survey' + this.props.match.params.date + '.csv';
       
         if (!csv.match(/^data:text\/csv/i)) {
           csv = `data:text/csv;charset=utf-8,${csv}`;

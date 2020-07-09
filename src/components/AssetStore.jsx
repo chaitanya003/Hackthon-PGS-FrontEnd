@@ -61,7 +61,7 @@ const columns = [
       axios.get(apiURl)
         .then((res) =>{
           let title = null
-          if(this.props.match.params.store == 1){
+          if(this.props.match.params.store == 0){
             title = <Typography variant="h5">Asset Store - IP Devices</Typography>
           }
           else{

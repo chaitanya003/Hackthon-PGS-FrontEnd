@@ -20,7 +20,6 @@ class PastSurvey extends Component {
 
   constructor(props){
         super(props)
-        console.log(props.value)
         this.state = {
                 data:props.value,
                 checked:true,
@@ -28,8 +27,8 @@ class PastSurvey extends Component {
   }
 
 
-  handleClick = (data, index) => {
-    let url = "/survey/" + data.activePayload[0].payload.surveyId
+  handleClick = (data) => {
+    let url = "/survey/" + data.activePayload[0].payload.surveyId + "/" + data.activePayload[0].payload.surveyStartDate 
     this.props.history.push(url)
   };  
 
@@ -89,7 +88,7 @@ render() {
                 onClick={this.handleClick}
               >
               <XAxis type="number" height={50} />
-              <YAxis type="category" dataKey="surveyEndDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
+              <YAxis type="category" dataKey="surveyStartDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
               <Legend verticalAlign="bottom"/>
               <Tooltip position={{ y: -80 }}  />
               <Bar dataKey="totalNumberOfResponse" stackId="a" fill="#8884d8" />
