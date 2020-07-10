@@ -47,6 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com"
+  }
 }

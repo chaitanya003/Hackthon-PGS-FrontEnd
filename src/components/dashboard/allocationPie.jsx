@@ -43,7 +43,7 @@ export default class allocationPie extends Component {
 	request = (buId) => {
 		let apiUrl
 		if (buId) {
-			apiUrl = '/asset/allocation/bu?bu_id=' + buId;
+			apiUrl = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/bu?bu_id=' + buId;
 			axios.get(apiUrl)
 				.then((response) => {
 					console.log(response)
