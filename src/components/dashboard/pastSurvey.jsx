@@ -61,7 +61,7 @@ render() {
                 <XAxis type="number" height={50} />
                 <YAxis type="category" dataKey="surveyEndDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
                 <Legend verticalAlign="bottom"/>
-                <Tooltip position={{ y: -80 }} content={<CustomTooltip />}/>  />
+                <Tooltip position={{ y: -80 }} content={<CustomTooltip />}/>
                 <Bar dataKey="percentageOfResponse" stackId="a" fill="#1976d2" />
                 <Bar dataKey="percentageOfNonResponse" stackId="a" fill="#388e3c" />
                 </BarChart>
