@@ -60,7 +60,7 @@ const columns = [
     
 
     componentDidMount(){
-      let apiURl = '/asset/allocation/survey/details?id=' + this.props.match.params.id 
+      let apiURl = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/survey/details?id=' + this.props.match.params.id 
       axios.get(apiURl)
         .then((res) =>{
           let title = null

@@ -42,7 +42,7 @@ function Graph() {
             const defaultBU = [1, 2, 3, 4, 5];
             const defaultProduct = 3;
             const defaultTimePeriod = "1";
-            let uri = '/asset/allocation/fault?bu=' + defaultBU + '&prod=' + defaultProduct + '&time=' + defaultTimePeriod;
+            let uri = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/fault?bu=' + defaultBU + '&prod=' + defaultProduct + '&time=' + defaultTimePeriod;
             await axios.get(uri).then(res => responseBody = (res.data));
         }
 
@@ -141,7 +141,7 @@ function Graph() {
                     timePeriodValueNew = Time.get(timePeriodValue);
                     console.log("Time Period =", timePeriodValue);
                     
-                    let uri = '/asset/allocation/fault?bu=' + entryValues + '&prod=' + productData + '&time=' + timePeriodValueNew;
+                    let uri = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/fault?bu=' + entryValues + '&prod=' + productData + '&time=' + timePeriodValueNew;
                     await axios.get(uri).then(res => responseBody = (res.data));
 
                     await responseBody.faultDetails.map((props) => {
@@ -192,7 +192,7 @@ function Graph() {
                     const productData = Product.get(productValue);
                     console.log("Product Data= ", productData);
 
-                    let uri = '/asset/allocation/fault/details?bu=' + entryValue + '&prod=' + productData + '&start=' + start + '&end=' + end + '&year=' + year;
+                    let uri = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/fault/details?bu=' + entryValue + '&prod=' + productData + '&start=' + start + '&end=' + end + '&year=' + year;
                     const response = await axios.get(uri);
                     dispatch(setData({payload: response.data.faultDetails}))
                     history.push('/faultdetails');
@@ -216,7 +216,7 @@ function Graph() {
                     const productData = Product.get(productValue);
                     console.log("Product Data= ", productData);
 
-                    let uri = '/asset/allocation/fault/details?bu=' + entryValue + '&prod=' + productData + '&start=' + start + '&end=' + end + '&year=' + year;
+                    let uri = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/fault/details?bu=' + entryValue + '&prod=' + productData + '&start=' + start + '&end=' + end + '&year=' + year;
                     console.log(uri)
                     const response = await axios.get(uri);
                     console.log(response.data.faultDetails)
