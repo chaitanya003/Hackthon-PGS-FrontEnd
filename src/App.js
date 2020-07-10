@@ -24,7 +24,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    let apiUrl = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation';
+    let apiUrl = '/asset/allocation';
     axios.get(apiUrl)
       .then((response) => {
         let data = []

@@ -18,7 +18,7 @@ class Survey extends React.Component{
 
     componentDidMount(){
 
-        axios.get('http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/survey')
+        axios.get('/asset/allocation/survey')
             .then((res) =>{
                 let Donutarr = [{name:"Responded", value:res.data[3].totalNumberOfResponse, col:"#6F6"},
                    {name:"Not responded", value:res.data[3].totalNumberOfNonResponse, col:"#F66"}]

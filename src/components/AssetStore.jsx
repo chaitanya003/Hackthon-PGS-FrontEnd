@@ -56,7 +56,7 @@ class AssetStore extends React.Component {
   }
 
   componentDidMount() {
-    let apiURl = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/store?store=' + this.props.match.params.store
+    let apiURl = '/asset/allocation/store?store=' + this.props.match.params.store
     axios.get(apiURl)
       .then((res) => {
         let title = null
