@@ -13,13 +13,28 @@ import setData from "./actions/setData";
 import setPage from "./actions/setPage";
 import DataDetails from "./DataDetails";
 import {FormControl, InputLabel, Select, MenuItem, Button} from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(2),
       minWidth: 120,
     },
   }));
+
+  const StyledButton = withStyles({
+    root: {
+        background: 'linear-gradient(45deg, #2196f3 30%, #0d47a1 90%)',
+        borderRadius: 3,
+        border: 0,
+        color: 'white',
+        height: 40,
+        padding: '0 30px',
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    },
+    label: {
+        textTransform: 'capitalize',
+    },
+})(Button);
 
 function Graph() {
     const classes = useStyles();
@@ -130,7 +145,7 @@ function Graph() {
                     </Select>
                 </FormControl>
 
-                <Button  style={{ maxHeight: '30px', minHeight: '30px', backgroundColor:"#1976d2", color:"white"}} className={classes.formControl}  variant="contained" onClick={async () => {
+                <StyledButton  style={{ maxHeight: '30px', minHeight: '30px', backgroundColor:"#1976d2", color:"white"}} className={classes.formControl}  variant="contained" onClick={async () => {
                     await arr.map((props) => {
                         if (entries.includes(props) === true)
                             entryValues.push(BU.get(props));
@@ -154,7 +169,7 @@ function Graph() {
                     });
 
                 }}>Submit
-                </Button>
+                </StyledButton>
             
                 <TagsInput onChange={(e) => {
                     dispatch(setTag({type: 'Filter', payload: " ", arr: e}))

@@ -5,6 +5,8 @@ import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from 'axios';
 import Navbar from './navbar';
+import {withStyles } from '@material-ui/core/styles';
+
 const columns = [
   {
     name: 'Asset Id',
@@ -124,11 +126,27 @@ const columns = [
       if(this.state.loading === true){
         return <LinearProgress/>
       }
+
+      const StyledButton = withStyles({
+        root: {
+            background: 'linear-gradient(45deg, #2196f3 30%, #0d47a1 90%)',
+            borderRadius: 3,
+            border: 0,
+            color: 'white',
+            height: 40,
+            padding: '0 30px',
+            boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        },
+        label: {
+            textTransform: 'capitalize',
+        },
+    })(Button);
+    
         return (
             <div style={{backgroundColor:"#eeeeee"}}> 
             <Navbar/>
             <Card style={{margin:"70px"}} elevation={10}>
-            <Button  style={{float:"right", margin:"10px", backgroundColor:"#1976d2", color:"white"}}  variant="contained" onClick={this.downloadCSV}>Export</Button>
+            <StyledButton  style={{float:"right", margin:"10px", backgroundColor:"#1976d2", color:"white"}}  variant="contained" onClick={this.downloadCSV}>Export</StyledButton>
             <DataTable
               title={this.state.title}
               columns={columns}
