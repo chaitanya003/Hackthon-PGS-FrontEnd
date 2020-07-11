@@ -28,8 +28,10 @@ class PastSurvey extends Component {
 
 
   handleClick = (data) => {
-    let url = "/survey/" + data.activePayload[0].payload.surveyId + "/" + data.activePayload[0].payload.surveyStartDate 
-    this.props.history.push(url)
+    if(data){
+      let url = "/survey/" + data.activePayload[0].payload.surveyId + "/" + data.activePayload[0].payload.surveyStartDate 
+      this.props.history.push(url)
+    }
   };  
 
   handleChange = (event) => {
@@ -50,9 +52,10 @@ render() {
                 name="checked"
                 inputProps={{ 'aria-label': 'primary checkbox' }}
               />
+              <center>
               <BarChart
-                width={400}
-                height={300}
+                width={420}
+                height={380}
                 data={this.state.data}
                 layout="vertical"
                 margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
@@ -60,11 +63,12 @@ render() {
                 >
                 <XAxis type="number" height={50} />
                 <YAxis type="category" dataKey="surveyEndDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
-                <Legend verticalAlign="bottom"/>
+                <Legend verticalAlign="bottom" layout="vertical" />
                 <Tooltip position={{ y: -80 }} content={<CustomTooltip />}/>
-                <Bar dataKey="percentageOfResponse" stackId="a" fill="#1976d2" />
-                <Bar dataKey="percentageOfNonResponse" stackId="a" fill="#388e3c" />
+                <Bar dataKey="percentageOfResponse" stackId="a" fill="#1976d2" barSize={30}/>
+                <Bar dataKey="percentageOfNonResponse" stackId="a" fill="#388e3c" barSize={30}/>
                 </BarChart>
+                </center>
               </>
               )
     }
@@ -79,9 +83,10 @@ render() {
                 name="checked"
                 inputProps={{ 'aria-label': 'primary checkbox' }}
               />
+              <center>
               <BarChart
-                width={400}
-                height={300}
+                width={420}
+                height={380}
                 data={this.state.data}
                 layout="vertical"
                 margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
@@ -89,12 +94,14 @@ render() {
               >
               <XAxis type="number" height={50} />
               <YAxis type="category" dataKey="surveyStartDate"   label={{value:"Past Surveys", position:"top" }} tick = {{fontSize:"10px", fill:"#111"}}/>
-              <Legend verticalAlign="bottom"/>
+              <Legend verticalAlign="bottom" layout="vertical"/>
               <Tooltip position={{ y: -80 }}  />
-              <Bar dataKey="totalNumberOfResponse" stackId="a" fill="#1976d2" />
-              <Bar dataKey="totalNumberOfNonResponse" stackId="a" fill="#388e3c" />
+              <Bar dataKey="totalNumberOfResponse" stackId="a" fill="#1976d2" barSize={30}/>
+              <Bar dataKey="totalNumberOfNonResponse" stackId="a" fill="#388e3c" barSize={30} />
               </BarChart>
+              </center>
               </>
+              
               )
     }
   

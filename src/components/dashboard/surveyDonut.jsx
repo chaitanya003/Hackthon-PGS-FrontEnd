@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
 import { withRouter} from 'react-router-dom';
+import { Switch, Typography } from '@material-ui/core';
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -55,8 +56,10 @@ const renderActiveShape = (props) => {
   constructor(props){
     super(props);
     this.state = {
-      data:props.value,
+      data:props.value.overall,
+      responseTypedata:props.value.responsetype,
       activeIndex:0,
+      checked:false,
     }
   }
 
@@ -71,14 +74,68 @@ const renderActiveShape = (props) => {
   };
 
   handleClick = (data, index) => {
-    let url = "/survey/" + this.props.Id + "/" + this.props.date
-    this.props.history.push(url)
+    if(data.name === "Not responded"){
+      let url = "/survey/" + this.props.Id + "/" + this.props.date
+      this.props.history.push(url)
+    }
+    else{
+      this.setState({
+        checked:true,
+      })
+    }
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      checked: event.target.checked,
+    })
   };
   
 
   render() {
+    if(this.state.checked === true){
+      return (
+        <>
+        <Typography variant = "subtitle1" style={{float:"left"}}>Response Type Distribution</Typography>
+        <Switch
+          style={{float:"left", color:"#1976d2"}}
+          checked={this.state.checked}
+          onChange={this.handleChange}
+          color="primary"
+          name="checked"
+          inputProps={{ 'aria-label': 'primary checkbox' }}
+        />
+        <center>
+        <PieChart width={400} height={400} margin={{ top: 30, right: 30, left: 30, bottom: 30 }} >
+          <Pie
+            activeIndex={this.state.activeIndex}
+            activeShape={renderActiveShape}
+            data={this.state.responseTypedata}
+            cx={170}
+            cy={150}
+            innerRadius={70}
+            outerRadius={90}
+            fill="#1976d2"
+            dataKey="value"
+            onMouseEnter={this.onPieEnter}
+          />
+        </PieChart>
+        </center>
+        </>
+      )
+    }
+    else{
     return (
-      
+      <>
+        <Typography variant = "subtitle1" style={{float:"left"}}>Response Type Distribution</Typography>
+        <Switch
+          style={{float:"left", color:"#1976d2"}}
+          checked={this.state.checked}
+          onChange={this.handleChange}
+          color="primary"
+          name="checked"
+          inputProps={{ 'aria-label': 'primary checkbox' }}
+        />
       <center>
       <PieChart width={400} height={400} margin={{ top: 30, right: 30, left: 30, bottom: 30 }} >
         <Pie
@@ -87,8 +144,8 @@ const renderActiveShape = (props) => {
           data={this.state.data}
           cx={170}
           cy={150}
-          innerRadius={60}
-          outerRadius={80}
+          innerRadius={70}
+          outerRadius={90}
           fill="#1976d2"
           dataKey="value"
           onMouseEnter={this.onPieEnter}
@@ -96,7 +153,9 @@ const renderActiveShape = (props) => {
         />
       </PieChart>
       </center>
+      </>
     );
+  }
   }
 }
 export default withRouter(SurveyDonut)
