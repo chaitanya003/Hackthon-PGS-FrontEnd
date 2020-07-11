@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { PieChart, Pie, Cell, Legend, Tooltip, } from 'recharts';
-import { LinearProgress } from '@material-ui/core';
+import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
+import { Card, CardHeader, CardContent, Divider } from '@material-ui/core';
 import axios from 'axios';
 
-const COLORS1 = ['#90caf9', '#64b5f6', '#42a5f5', '#2196f3','#1e88e5','#1976d2','#1565c0','#0d47a1'];
-const COLORS2 = ['#a5d6a7', '#81c784', '#66bb6a', '#4caf50', '#43a047', '#388e3c','#2e7d32','#1b5e20'];
+const COLORS1 = ['#64b5f6', '#42a5f5', '#2196f3', '#1e88e5', '#1976d2', '#1565c0', '#0d47a1','#90caf9'];
+const COLORS2 = ['#81c784', '#66bb6a', '#4caf50', '#43a047', '#388e3c', '#2e7d32', '#1b5e20','#a5d6a7'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -97,49 +97,64 @@ export default class allocationPie extends Component {
 		// }
 		return (
 			<div style={{ display: "flex", flexDirection: "row" }}>
-				<PieChart width={400} height={400}>
-					<Pie
-						data={this.state.data}
-						cx={150}
-						cy={150}
-						labelLine={false}
-						label={renderCustomizedLabel}
-						outerRadius={110}
-						fill="#8884d8"
-						dataKey="value"
-						onClick={e => {
-							this.onChangeSector(e.id);
-						}
-						}
-					>
-						{
-							this.state.data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS1[index % COLORS1.length]} />)
-						}
+				<Card variant="outlined">
+					<CardHeader title="Business Unit" style={{ height:"15px", textAlign: 'center', backgroundColor:'#f5f5f5' }} />
+					<Divider />
+					<CardContent style={{ backgroundColor:'#fafafa' } }>
+						<PieChart width={400} height={350}>
+							<Pie
+								data={this.state.data}
+								cx={100}
+								cy={120}
+								labelLine={false}
+								label={renderCustomizedLabel}
+								outerRadius={110}
+								fill="#8884d8"
+								dataKey="value"
+								onClick={e => {
+									this.onChangeSector(e.id);
+								}
+								}
+							>
+								{
+									this.state.data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS1[index % COLORS1.length]} />)
+								}
 
-					</Pie>
-					<Tooltip />
-					<Legend  iconType="wye" layout="vertical" align='left' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
-				</PieChart>
-				{this.state.subdata !== null &&
-				<PieChart width={400} height={400}>
-					<Pie
-						data={this.state.subdata}
-						cx={150}
-						cy={150}
-						labelLine={false}
-						label={renderCustomizedLabel}
-						outerRadius={110}
-						fill="#8884d8"
-						dataKey="value"
-					>
-						{
-							this.state.subdata.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS2[index % COLORS2.length]} />)
-						}
-					</Pie>
-					<Tooltip />
-					<Legend iconType="wye" layout="vertical" align='right' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
-				</PieChart>
-				}
+							</Pie>
+							<Tooltip />
+							<Legend iconType="wye" layout="vertical" align='left' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
+						</PieChart>
+					</CardContent>
+				</Card>
+				<Card >
+
+					{this.state.subdata !== null && <div><CardHeader title="Sub Business Unit" style={{ height:"15px", textAlign: 'center', backgroundColor:'#f5f5f5' } } />
+						<Divider />
+						<CardContent style={{ backgroundColor:'#fafafa' } }>
+							<PieChart width={400} height={350}>
+								<Pie
+									data={this.state.subdata}
+									cx={200}
+									cy={120}
+									labelLine={false}
+									label={renderCustomizedLabel}
+									outerRadius={110}
+									fill="#8884d8"
+									dataKey="value"
+								>
+									{
+										this.state.subdata.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS2[index % COLORS2.length]} />)
+									}
+								</Pie>
+								<Tooltip />
+								<Legend iconType="wye" layout="vertical" align='right' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
+							</PieChart>
+						</CardContent>
+					</div>
+					}
+
+
+				</Card>
 			</div>
 
 		);
