@@ -1,6 +1,6 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
-import { Button, Typography, LinearProgress } from '@material-ui/core';
+import { Button, Typography, LinearProgress, TextField, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from 'axios';
@@ -42,7 +42,28 @@ const columns = [
 ];
 
   
-  
+const FilterComponent = ({ filterText, filterBy ,onFilter, onClear, handleFilterBy }) => (
+  <>
+    <TextField variant="outlined" style={{margin:"10px"}} id="search" type="text" placeholder="Filter" value={filterText} onChange={onFilter} />
+    <FormControl style={{margin:"10px"}}>
+        <InputLabel id="select-filter">Filter By</InputLabel>
+        <Select
+          labelId="select-filter"
+          id="filterBy"
+          value={filterBy}
+          onChange={handleFilterBy}
+        >
+          <MenuItem value="assetName">Asset Name</MenuItem>
+          <MenuItem value="assetId">Asset ID</MenuItem>
+          <MenuItem value="assetType">Asset Type</MenuItem>
+          <MenuItem value="serialNo">Serial No</MenuItem>
+          <MenuItem value="employeeName">Employee Name</MenuItem>
+          <MenuItem value="employeeEmail">EmailID</MenuItem>
+        </Select>
+      </FormControl>
+    <Button type="button" onClick={onClear} size="large" style={{margin:"10px", backgroundColor:"#1976d2", color:"white"}}>Clear</Button>
+  </>
+);
   
 
 
@@ -54,6 +75,9 @@ const columns = [
         data:null,
         title:"",
         loading:true,
+        filterText:"",
+        filterBy:"assetName",
+        resetPagination:false,
       }
       this.convertArrayOfObjectsToCSV = this.convertArrayOfObjectsToCSV.bind(this);
       this.downloadCSV = this.downloadCSV.bind(this);
@@ -120,12 +144,45 @@ const columns = [
         link.setAttribute('download', filename);
         link.click();
       }
+
+      handleClear = () => {
+        if (this.state.filterText) {
+          this.setState({
+            resetPagination:!this.state.resetPagination,
+            filterText:"",
+          })
+        }
+      }
+      handleFilter = (e) => {
+        this.setState({
+          filterText:e.target.value,
+        })
+      }
+    
+      handleFilterBy = (e) => {
+        this.setState({
+          filterBy:e.target.value,
+        })
+      }
     
 
     render(){
       if(this.state.loading === true){
         return <LinearProgress/>
       }
+      let filterdata = this.state.data
+      if(this.state.filterBy === "assetName")
+        filterdata = this.state.data.filter(item => item.assetName && item.assetName.toLowerCase().includes(this.state.filterText.toLowerCase()));
+      if(this.state.filterBy === "assetType")
+        filterdata = this.state.data.filter(item => item.assetType && item.assetType.toLowerCase().includes(this.state.filterText.toLowerCase()));
+      else if(this.state.filterBy === "assetId")
+        filterdata = this.state.data.filter(item => item.assetId && String(item.assetId).toLowerCase().includes(this.state.filterText.toLowerCase())); 
+      else if(this.state.filterBy === "serialNo")
+        filterdata = this.state.data.filter(item => item.serialNo && String(item.serialNo).toLowerCase().includes(this.state.filterText.toLowerCase()));
+      else if(this.state.filterBy === "employeeName")
+        filterdata = this.state.data.filter(item => item.employeeName && item.employeeName.toLowerCase().includes(this.state.filterText.toLowerCase()));        
+      else if(this.state.filterBy === "employeeEmail")
+        filterdata = this.state.data.filter(item => item.employeeEmail && item.employeeEmail.toLowerCase().includes(this.state.filterText.toLowerCase()));        
 
       const StyledButton = withStyles({
         root: {
@@ -146,13 +203,23 @@ const columns = [
             <div style={{backgroundColor:"#eeeeee"}}> 
             <Navbar/>
             <Card style={{margin:"70px"}} elevation={10}>
-            <StyledButton  style={{float:"right", margin:"10px", backgroundColor:"#1976d2", color:"white"}}  variant="contained" onClick={this.downloadCSV}>Export</StyledButton>
             <DataTable
               title={this.state.title}
               columns={columns}
-              data={this.state.data}
+              data={filterdata}
               sortIcon={<SortIcon />}
               pagination
+              paginationResetDefaultPage={this.state.resetPagination}
+              subHeader={true}
+              subHeaderComponent={
+                (
+                  <>
+                  <FilterComponent style={{float:"right"}} onFilter={this.handleFilter} handleFilterBy={this.handleFilterBy} onClear={this.handleClear} filterText={this.state.filterText} filterBy={this.state.filterBy}/>
+                  <StyledButton  style={{float:"right", margin:"10px", backgroundColor:"#1976d2", color:"white"}}  variant="contained" onClick={this.downloadCSV}>Export</StyledButton>
+                  </>
+                )
+              }
+              subHeaderAlign="right"
             />
             </Card>
             </div>
