@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 })(Button);
 
 function Graph() {
-    let sref=new Set();
     const classes = useStyles();
     const history = useHistory();
     const [flag1, setFlag1] = useState(false);
@@ -93,9 +92,8 @@ function Graph() {
                             id={"businessUnits"}
                             onChange={(e) => {
                                 let val = (e.target.value);
-                                if(!sref.has(val)) {
-                                    sref.add(val);
-                                    console.log("Set Values = ",sref);
+                                if(!arr.includes(val)) {
+                                    console.log("Set Values = ",arr);
                                     dispatch(setTag({type: 'Tag', payload: val}))
 
                                 }
