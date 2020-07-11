@@ -15,13 +15,12 @@ import MotorcycleIcon from '@material-ui/icons/Motorcycle';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Navbar from './navbar';
-import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import ErrorIcon from '@material-ui/icons/Error';
 
 
-const data = new Map([["1234", 1], ["1235", 2], ["1236", 3], ["1237", 4]]);
+const data = new Map([["64", 3], ["65", 5], ["66", 7], ["67", 6], ["68", 5], ["69", 3], ["70", 4], ["71", 3], ["72", 5]]);
 
 const StyledButton = withStyles({
     root: {
@@ -138,21 +137,10 @@ function getSteps() {
 
 export default function CustomizedSteppers() {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(1);
+    const [activeStep, setActiveStep] = React.useState(2);
     const steps = getSteps();
     let textValue = ''
 
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
-    };
 
     const handleDummy = () => {
         let newValue = data.get(textValue)
@@ -167,6 +155,18 @@ export default function CustomizedSteppers() {
         }
         if (newValue === 4) {
             handleDummy4();
+        }
+        if (newValue === 5) {
+            handleDummy5();
+        }
+        if (newValue === 6) {
+            handleDummy6();
+        }
+        if (newValue === 7) {
+            handleDummy7();
+        }
+        if (newValue === 8) {
+            handleDummy8();
         }
     };
 
@@ -186,6 +186,23 @@ export default function CustomizedSteppers() {
     const handleDummy4 = () => {
         setActiveStep(4);
     };
+
+    const handleDummy5 = () => {
+        setActiveStep(5);
+    };
+
+    const handleDummy6 = () => {
+        setActiveStep(6);
+    };
+
+    const handleDummy7 = () => {
+        setActiveStep(7);
+    };
+
+    const handleDummy8 = () => {
+        setActiveStep(8);
+    };
+
 
     const onChange = (event) => {
         textValue = event.target.value
@@ -214,22 +231,6 @@ export default function CustomizedSteppers() {
                         </Step>
                     ))}
                 </Stepper>
-                <div>
-                    {activeStep === steps.length ? (
-                        <div>
-                            <Typography className={classes.instructions}>
-                                All steps completed - you&apos;re finished
-            </Typography>
-                            <StyledButton onClick={handleReset} className={classes.button}>
-                                Reset
-            </StyledButton>
-                        </div>
-                    ) : (
-                            <div>
-                                
-                            </div>
-                        )}
-                </div>
             </Card>
         </div>
     );
