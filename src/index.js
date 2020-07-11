@@ -7,7 +7,7 @@ import AssetStore from './components/AssetStore';
 import FaultDetail from './DataDetails';
 import Tracker from './components/tracker';
 import * as serviceWorker from './serviceWorker';
-import {Switch,Route, BrowserRouter as Router} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import allReducers from "./reducers";
@@ -21,7 +21,7 @@ const routing = (
       <Route exact path="/survey/:id/:date" component={Survey}/>
       <Route exact path="/asset/:store" component={AssetStore}/>
       <Route exact path="/tracker" component={Tracker}/>
-        <Route exact path="/faultdetails" component={FaultDetail}/>
+      <Route exact path="/faultdetails/:entryValue/:productData/:start/:end/:year" component={FaultDetail}/>
     </Switch>
   </Router>
     </Provider>
