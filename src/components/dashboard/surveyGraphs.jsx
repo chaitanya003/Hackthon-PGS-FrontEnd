@@ -20,13 +20,17 @@ class Survey extends React.Component{
 
         axios.get('http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/survey')
             .then((res) =>{
-                let Donutarr = [{name:"Responded", value:res.data[3].totalNumberOfResponse, col:"#6F6"},
-                   {name:"Not responded", value:res.data[3].totalNumberOfNonResponse, col:"#F66"}]
+                let Donut = {
+                    overall:[{name:"Responded", value:res.data[3].totalNumberOfResponse, col:"#6F6"},
+                    {name:"Not responded", value:res.data[3].totalNumberOfNonResponse, col:"#F66"}],
+                    responsetype:[{name:"+ve Response", value:res.data[3].totalNumberOfPositiveResponses,col:"#6F6"},
+                                {name:"-ve Response", value:res.data[3].totalNumberOfNegativeResponses, col:"#F66"}]
+                }
                 let Pastarr = res.data.slice(0,3).reverse()
                 this.setState({
                     currentSurveyID:res.data[3].surveyId,
                     currentSurveyDate:res.data[3].surveyStartDate,
-                    donutData:Donutarr,
+                    donutData:Donut,
                     pastData:Pastarr,
                     loading:false,
                 })
