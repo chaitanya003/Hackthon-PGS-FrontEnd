@@ -212,18 +212,18 @@ export default function CustomizedSteppers() {
         <div className={classes.root} style={{ backgroundColor: "#eeeeee" }}>
             <Navbar />
             <Card style={{ margin: "70px" }} elevation={10}>
-            <Card alignItems="right" style={{ margin: "0px" }}>
-            <TextField size="medium" id="standard-basic" label="Asset id" onChange={onChange} />
-            <StyledButton
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                startIcon={<SearchIcon />}
-                onClick={handleDummy}
-            >
-                Search
+                <Card alignItems="right" style={{ margin: 1 }}>
+                    <TextField size="medium" id="standard-basic" label="Asset id" onChange={onChange} style={{ margin: 4 }} />
+                    <StyledButton
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        startIcon={<SearchIcon />}
+                        onClick={handleDummy}
+                    >
+                        Search
       </StyledButton>
-      </Card>
+                </Card>
                 <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
                     {steps.map((label) => (
                         <Step key={label}>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
-import { Card, CardHeader, CardContent, Divider } from '@material-ui/core';
+import { Typography, Card, CardHeader, CardContent, Divider } from '@material-ui/core';
 import axios from 'axios';
 
-const COLORS1 = ['#64b5f6', '#42a5f5', '#2196f3', '#1e88e5', '#1976d2', '#1565c0', '#0d47a1','#90caf9'];
-const COLORS2 = ['#81c784', '#66bb6a', '#4caf50', '#43a047', '#388e3c', '#2e7d32', '#1b5e20','#a5d6a7'];
+const COLORS1 = ['#5893d8', '#53bbc9', '#5fd4a8', '#8ee677', '#dcf483', '#eedc9b', '#0d47a1', '#90caf9'];
+const COLORS2 = ['#5893d8', '#53bbc9', '#5fd4a8', '#8ee677', '#dcf483', '#eedc9b', '#0d47a1', '#90caf9'];
+
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -92,15 +93,12 @@ export default class allocationPie extends Component {
 	};
 
 	render() {
-		// if (this.state.loading === true) {
-		// 	return <LinearProgress color="secondary" />;
-		// }
 		return (
 			<div style={{ display: "flex", flexDirection: "row" }}>
-				<Card variant="outlined">
-					<CardHeader title="Business Unit" style={{ height:"15px", textAlign: 'center', backgroundColor:'#f5f5f5' }} />
+				<Card variant="outlined" style={{ margin: 5 }}>
+					<CardHeader title="BUSINESS UNIT" style={{ height: "15px", textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 					<Divider />
-					<CardContent style={{ backgroundColor:'#fafafa' } }>
+					<CardContent style={{ backgroundColor: '#fafafa' }}>
 						<PieChart width={400} height={350}>
 							<Pie
 								data={this.state.data}
@@ -126,11 +124,14 @@ export default class allocationPie extends Component {
 						</PieChart>
 					</CardContent>
 				</Card>
-				<Card >
-
-					{this.state.subdata !== null && <div><CardHeader title="Sub Business Unit" style={{ height:"15px", textAlign: 'center', backgroundColor:'#f5f5f5' } } />
+				<Card variant="outlined" style={{ margin: 5 }}>
+					{
+						this.state.subdata === null && <div><CardHeader title="SUB BUSINESS UNIT" style={{ height: "15px", textAlign: 'center', backgroundColor: '#f5f5f5' }} />
+							<Divider /><Typography style={{ margin: 100, textAlign: 'center', color: '#1b5e20', fontFamily: 'Lucida Console' }}>Click on the BU to get more insights about it.</Typography></div>
+					}
+					{this.state.subdata !== null && <div><CardHeader title="SUB BUSINESS UNIT" style={{ height: "15px", textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 						<Divider />
-						<CardContent style={{ backgroundColor:'#fafafa' } }>
+						<CardContent style={{ backgroundColor: '#fafafa' }}>
 							<PieChart width={400} height={350}>
 								<Pie
 									data={this.state.subdata}

@@ -43,24 +43,24 @@ const columns = [
   },
 ];
 
-const FilterComponent = ({ filterText, filterBy ,onFilter, onClear, handleFilterBy }) => (
+const FilterComponent = ({ filterText, filterBy, onFilter, onClear, handleFilterBy }) => (
   <>
-    <TextField variant="outlined" style={{margin:"10px"}} id="search" type="text" placeholder="Filter" value={filterText} onChange={onFilter} />
-    <FormControl style={{margin:"10px"}}>
-        <InputLabel id="select-filter">Filter By</InputLabel>
-        <Select
-          labelId="select-filter"
-          id="filterBy"
-          value={filterBy}
-          onChange={handleFilterBy}
-        >
-          <MenuItem value="assetName">Asset Name</MenuItem>
-          <MenuItem value="assetId">Asset ID</MenuItem>
-          <MenuItem value="serialNumber">Serial No</MenuItem>
-          <MenuItem value="status">Status</MenuItem>
-        </Select>
-      </FormControl>
-    <Button type="button" onClick={onClear} size="large" style={{margin:"10px", backgroundColor:"#1976d2", color:"white"}}>Clear</Button>
+    <TextField variant="outlined" style={{ margin: "10px" }} id="search" type="text" placeholder="Filter" value={filterText} onChange={onFilter} />
+    <FormControl style={{ margin: "10px" }}>
+      <InputLabel id="select-filter">Filter By</InputLabel>
+      <Select
+        labelId="select-filter"
+        id="filterBy"
+        value={filterBy}
+        onChange={handleFilterBy}
+      >
+        <MenuItem value="assetName">Asset Name</MenuItem>
+        <MenuItem value="assetId">Asset ID</MenuItem>
+        <MenuItem value="serialNumber">Serial No</MenuItem>
+        <MenuItem value="status">Status</MenuItem>
+      </Select>
+    </FormControl>
+    <Button type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>Clear</Button>
   </>
 );
 
@@ -72,9 +72,9 @@ class AssetStore extends React.Component {
       data: null,
       title: "",
       loading: true,
-      filterText:"",
-      filterBy:"assetName",
-      resetPagination:false,
+      filterText: "",
+      filterBy: "assetName",
+      resetPagination: false,
     }
   }
 
@@ -103,20 +103,20 @@ class AssetStore extends React.Component {
   handleClear = () => {
     if (this.state.filterText) {
       this.setState({
-        resetPagination:!this.state.resetPagination,
-        filterText:"",
+        resetPagination: !this.state.resetPagination,
+        filterText: "",
       })
     }
   }
   handleFilter = (e) => {
     this.setState({
-      filterText:e.target.value,
+      filterText: e.target.value,
     })
   }
 
   handleFilterBy = (e) => {
     this.setState({
-      filterBy:e.target.value,
+      filterBy: e.target.value,
     })
   }
 
@@ -125,21 +125,21 @@ class AssetStore extends React.Component {
       return <LinearProgress />
     }
     let filterdata = this.state.data
-    if(this.state.filterBy === "assetName")
+    if (this.state.filterBy === "assetName")
       filterdata = this.state.data.filter(item => item.assetName && item.assetName.toLowerCase().includes(this.state.filterText.toLowerCase()));
-    else if(this.state.filterBy === "assetId")
-      filterdata = this.state.data.filter(item => item.assetId && String(item.assetId).toLowerCase().includes(this.state.filterText.toLowerCase())); 
-    else if(this.state.filterBy === "serialNumber")
-      filterdata = this.state.data.filter(item => item.serialNumber && String(item.serialNumber).toLowerCase().includes(this.state.filterText.toLowerCase()));      
-    else if(this.state.filterBy === "status"){
-      if(this.state.filterText.toLowerCase() === "allotted" || this.state.filterText.toLowerCase() === "unallotted")
+    else if (this.state.filterBy === "assetId")
+      filterdata = this.state.data.filter(item => item.assetId && String(item.assetId).toLowerCase().includes(this.state.filterText.toLowerCase()));
+    else if (this.state.filterBy === "serialNumber")
+      filterdata = this.state.data.filter(item => item.serialNumber && String(item.serialNumber).toLowerCase().includes(this.state.filterText.toLowerCase()));
+    else if (this.state.filterBy === "status") {
+      if (this.state.filterText.toLowerCase() === "allotted" || this.state.filterText.toLowerCase() === "unallotted")
         filterdata = this.state.data.filter(item => item.status && item.status.toLowerCase() === this.state.filterText.toLowerCase());
-      }  
-      return (
+    }
+    return (
       <div style={{ backgroundColor: "#e1f5fe" }}>
         <Navbar />
         <Card style={{ margin: "70px" }} elevation={10}>
-          
+
           <DataTable
             title={this.state.title}
             columns={columns}
@@ -150,7 +150,7 @@ class AssetStore extends React.Component {
             subHeader={true}
             subHeaderComponent={
               (
-                <FilterComponent style={{float:"right"}} onFilter={this.handleFilter} handleFilterBy={this.handleFilterBy} onClear={this.handleClear} filterText={this.state.filterText} filterBy={this.state.filterBy}/>
+                <FilterComponent style={{ float: "right" }} onFilter={this.handleFilter} handleFilterBy={this.handleFilterBy} onClear={this.handleClear} filterText={this.state.filterText} filterBy={this.state.filterBy} />
               )
             }
             subHeaderAlign="right"

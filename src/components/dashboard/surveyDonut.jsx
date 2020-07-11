@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
-import { withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Switch, Typography } from '@material-ui/core';
 
 const renderActiveShape = (props) => {
@@ -42,8 +42,8 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#1976d2">{`${value}`}</text>
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#388e3c">
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#207a87">{`${value}`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#60d5a8">
         {`(${(percent * 100).toFixed(2)}%)`}
       </text>
     </g>
@@ -51,15 +51,15 @@ const renderActiveShape = (props) => {
 };
 
 
- class SurveyDonut extends Component {
+class SurveyDonut extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      data:props.value.overall,
-      responseTypedata:props.value.responsetype,
-      activeIndex:0,
-      checked:false,
+      data: props.value.overall,
+      responseTypedata: props.value.responsetype,
+      activeIndex: 0,
+      checked: false,
     }
   }
 
@@ -74,13 +74,13 @@ const renderActiveShape = (props) => {
   };
 
   handleClick = (data, index) => {
-    if(data.name === "Not responded"){
+    if (data.name === "Not responded") {
       let url = "/survey/" + this.props.Id + "/" + this.props.date
       this.props.history.push(url)
     }
-    else{
+    else {
       this.setState({
-        checked:true,
+        checked: true,
       })
     }
   };
@@ -90,72 +90,72 @@ const renderActiveShape = (props) => {
       checked: event.target.checked,
     })
   };
-  
+
 
   render() {
-    if(this.state.checked === true){
+    if (this.state.checked === true) {
       return (
         <>
-        <Typography variant = "subtitle1" style={{float:"left"}}>Response Type Distribution</Typography>
-        <Switch
-          style={{float:"left", color:"#1976d2"}}
-          checked={this.state.checked}
-          onChange={this.handleChange}
-          color="primary"
-          name="checked"
-          inputProps={{ 'aria-label': 'primary checkbox' }}
-        />
-        <center>
-        <PieChart width={400} height={400} margin={{ top: 30, right: 30, left: 30, bottom: 30 }} >
-          <Pie
-            activeIndex={this.state.activeIndex}
-            activeShape={renderActiveShape}
-            data={this.state.responseTypedata}
-            cx={170}
-            cy={150}
-            innerRadius={70}
-            outerRadius={90}
-            fill="#1976d2"
-            dataKey="value"
-            onMouseEnter={this.onPieEnter}
+          <Typography variant="subtitle1" style={{ float: "left" }}>Response Type Distribution</Typography>
+          <Switch
+            style={{ float: "left", color: "#207a87" }}
+            checked={this.state.checked}
+            onChange={this.handleChange}
+            color="primary"
+            name="checked"
+            inputProps={{ 'aria-label': 'primary checkbox' }}
           />
-        </PieChart>
-        </center>
+          <center>
+            <PieChart width={400} height={400} margin={{ top: 30, right: 30, left: 30, bottom: 30 }} >
+              <Pie
+                activeIndex={this.state.activeIndex}
+                activeShape={renderActiveShape}
+                data={this.state.responseTypedata}
+                cx={170}
+                cy={150}
+                innerRadius={90}
+                outerRadius={110}
+                fill="#53bbc9"
+                dataKey="value"
+                onMouseEnter={this.onPieEnter}
+              />
+            </PieChart>
+          </center>
         </>
       )
     }
-    else{
-    return (
-      <>
-        <Typography variant = "subtitle1" style={{float:"left"}}>Response Type Distribution</Typography>
-        <Switch
-          style={{float:"left", color:"#1976d2"}}
-          checked={this.state.checked}
-          onChange={this.handleChange}
-          color="primary"
-          name="checked"
-          inputProps={{ 'aria-label': 'primary checkbox' }}
-        />
-      <center>
-      <PieChart width={400} height={400} margin={{ top: 30, right: 30, left: 30, bottom: 30 }} >
-        <Pie
-          activeIndex={this.state.activeIndex}
-          activeShape={renderActiveShape}
-          data={this.state.data}
-          cx={170}
-          cy={150}
-          innerRadius={70}
-          outerRadius={90}
-          fill="#1976d2"
-          dataKey="value"
-          onMouseEnter={this.onPieEnter}
-          onClick={this.handleClick}
-        />
-      </PieChart>
-      </center>
-      </>
-    );
-  }
+    else {
+      return (
+        <>
+          <Typography variant="subtitle1" style={{ float: "left" }}>Response Type Distribution</Typography>
+          <Switch
+            style={{ float: "left", color: "#1976d2" }}
+            checked={this.state.checked}
+            onChange={this.handleChange}
+            color="primary"
+            name="checked"
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+          />
+          <center>
+            <PieChart width={400} height={400} margin={{ top: 30, right: 30, left: 30, bottom: 30 }} >
+              <Pie
+                activeIndex={this.state.activeIndex}
+                activeShape={renderActiveShape}
+                data={this.state.data}
+                cx={170}
+                cy={150}
+                innerRadius={90}
+                outerRadius={110}
+                fill="#53bbc9"
+                dataKey="value"
+                onMouseEnter={this.onPieEnter}
+                onClick={this.handleClick}
+              />
+            </PieChart>
+          </center>
+        </>
+      );
+    }
   }
 }
 export default withRouter(SurveyDonut)

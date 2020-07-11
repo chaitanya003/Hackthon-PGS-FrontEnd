@@ -1,14 +1,39 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import DataTable from "react-data-table-component";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "reactstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles.css';
 import "bootstrap";
 import Navbar from './components/navbar'
-import {Card} from '@material-ui/core'
+import { Card, Select, MenuItem, Button, FormControl, InputLabel, TextField } from '@material-ui/core'
 import * as axios from "axios";
 import setData from "./actions/setData";
+
+
+
+const FilterComponent = ({ filterText, filterBy, onFilter, onClear, handleFilterBy }) => (
+    <>
+        <TextField variant="outlined" style={{ margin: "10px" }} id="search" type="text" placeholder="Filter" value={filterText} onChange={onFilter} />
+        <FormControl style={{ margin: "10px" }}>
+            <InputLabel id="select-filter">Filter By</InputLabel>
+            <Select
+                labelId="select-filter"
+                id="filterBy"
+                value={filterBy}
+                onChange={handleFilterBy}
+            >
+                <MenuItem value="employeeName">Employee Name</MenuItem>
+                <MenuItem value="assetName">Asset Name</MenuItem>
+                <MenuItem value="serialNo">Serial No</MenuItem>
+                <MenuItem value="faultType">Fault Type</MenuItem>
+                <MenuItem value="faultDescription">Fault Desc</MenuItem>
+                <MenuItem value="faultDate">Fault Date</MenuItem>
+            </Select>
+        </FormControl>
+        <Button type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>Clear</Button>
+    </>
+);
 
 function DataDetails(props) {
 
@@ -32,7 +57,7 @@ function DataDetails(props) {
         f().then(() => {
             let val = response.data.faultDetails;
             console.log("Value = ", val);
-            dispatch(setData({payload: val}));
+            dispatch(setData({ payload: val }));
         });
 
     });
@@ -70,20 +95,51 @@ function DataDetails(props) {
         }
 
     ];
+    const [filterText, setFilterText] = React.useState('');
+    const [filterBy, setFilterBy] = React.useState('employeeName');
+    const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
 
+    let filterdata = data1
+    if (filterBy === "assetName")
+        filterdata = data1.filter(item => item.assetName && item.assetName.toLowerCase().includes(filterText.toLowerCase()));
+    else if (filterBy === "employeeName")
+        filterdata = data1.filter(item => item.employeeName && item.employeeName.toLowerCase().includes(filterText.toLowerCase()));
+    else if (filterBy === "serialNo")
+        filterdata = data1.filter(item => item.serialNo && String(item.serialNo).toLowerCase().includes(filterText.toLowerCase()));
+    else if (filterBy === "faultType")
+        filterdata = data1.filter(item => item.faultType && String(item.faultType).toLowerCase().includes(filterText.toLowerCase()));
+    else if (filterBy === "faultDescription")
+        filterdata = data1.filter(item => item.faultDescription && item.faultDescription.toLowerCase().includes(filterText.toLowerCase()));
+    else if (filterBy === "faultDate")
+        filterdata = data1.filter(item => item.faultDate && String(item.faultDate).toLowerCase().includes(filterText.toLowerCase()));
+
+    const subHeaderComponentMemo = React.useMemo(() => {
+        const handleClear = () => {
+            if (filterText) {
+                setResetPaginationToggle(!resetPaginationToggle);
+                setFilterText('');
+            }
+        };
+
+        return <FilterComponent onFilter={e => setFilterText(e.target.value)} handleFilterBy={e => setFilterBy(e.target.value)} onClear={handleClear} filterText={filterText} filterBy={filterBy} />;
+    }, [filterText, resetPaginationToggle]);
+
+    console.log(filterBy)
 
     return (
 
-        <div style={{backgroundColor: "#eeeeee"}}>
-
-            <Navbar/>
-            <Card style={{margin: "70px"}} elevation={10}>
+        <div style={{ backgroundColor: "#e3f2fd" }}>
+            <Navbar />
+            <Card style={{ margin: "70px" }} elevation={10}>
                 <DataTable
                     title={" Fault Details"}
                     columns={columns}
-                    data={data1}
+                    data={filterdata}
                     pagination
                     defaultSortField={'title'}
+                    paginationResetDefaultPage={resetPaginationToggle}
+                    subHeader
+                    subHeaderComponent={subHeaderComponentMemo}
                 />
             </Card>
         </div>

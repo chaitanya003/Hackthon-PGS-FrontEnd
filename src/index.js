@@ -7,24 +7,24 @@ import AssetStore from './components/AssetStore';
 import FaultDetail from './DataDetails';
 import Tracker from './components/tracker';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import {createStore} from "redux";
-import {Provider} from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import allReducers from "./reducers";
 
-const  store=createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 const routing = (
-    <Provider store={store}>
-  <Router>
-    <Switch>
-      <Route exact path="/" component={App}/>
-      <Route exact path="/survey/:id/:date" component={Survey}/>
-      <Route exact path="/asset/:store" component={AssetStore}/>
-      <Route exact path="/tracker" component={Tracker}/>
-      <Route exact path="/faultdetails/:entryValue/:productData/:start/:end/:year" component={FaultDetail}/>
-    </Switch>
-  </Router>
-    </Provider>
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route exact path="/survey/:id/:date" component={Survey} />
+        <Route exact path="/asset/:store" component={AssetStore} />
+        <Route exact path="/tracker" component={Tracker} />
+        <Route exact path="/faultdetails/:entryValue/:productData/:start/:end/:year" component={FaultDetail} />
+      </Switch>
+    </Router>
+  </Provider>
 
 )
 ReactDOM.render(routing, document.getElementById('root'));

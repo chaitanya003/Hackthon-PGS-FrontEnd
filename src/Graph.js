@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {Bar, BarChart, Brush, Legend, ReferenceLine, Tooltip, XAxis, YAxis} from 'recharts';
-import {Row} from "reactstrap";
+import React, { useEffect, useState } from 'react';
+import { Bar, BarChart, Brush, Legend, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
+import { Row } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import TagsInput from "react-tagsinput";
 import 'react-tagsinput/react-tagsinput.css'
 import setTag from "./actions/setTag";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as axios from "axios";
 import setInitialData from "./actions/setInitialData";
-import {useHistory} from 'react-router-dom';
-import {FormControl, InputLabel, Select, MenuItem, Button} from "@material-ui/core";
-import { makeStyles,withStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+import { FormControl, InputLabel, Select, MenuItem, Button } from "@material-ui/core";
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -19,9 +19,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-  const StyledButton = withStyles({
+const StyledButton = withStyles({
     root: {
-        background: 'linear-gradient(45deg, #2196f3 30%, #0d47a1 90%)',
+        background: 'linear-gradient(45deg, #5893d8 30%, #53bbc9 90%)',
         borderRadius: 3,
         border: 0,
         color: 'white',
@@ -66,7 +66,7 @@ function Graph() {
                     faultyUnits: props.faultyUnits
                 };
             });
-            dispatch(setInitialData({type: "Initial", payload: res}))
+            dispatch(setInitialData({ type: "Initial", payload: res }))
         });
 
     }, []);
@@ -81,7 +81,7 @@ function Graph() {
 
         <div>
             <Row>
-                <Row style={{marginLeft: "50px"}}>
+                <Row style={{ marginLeft: "50px" }}>
                     <FormControl className={classes.formControl}>
                         <InputLabel id="selectBU">Business Unit</InputLabel>
                         <Select
@@ -90,7 +90,7 @@ function Graph() {
                             onChange={(e) => {
                                 let val = (e.target.value);
                                 if (!arr.includes(val)) {
-                                    dispatch(setTag({type: 'Tag', payload: val}))
+                                    dispatch(setTag({ type: 'Tag', payload: val }))
 
                                 }
                             }}
@@ -110,7 +110,7 @@ function Graph() {
                             onChange={(e) => {
                                 let val = (e.target.value);
                                 if (!arr.includes('Keyboard') && !arr.includes('Monitor') && !arr.includes('Laptop') && !arr.includes('Mouse')) {
-                                    dispatch(setTag({type: 'Tag', payload: val}))
+                                    dispatch(setTag({ type: 'Tag', payload: val }))
                                     setProductValue(val);
                                 }
 
@@ -130,7 +130,7 @@ function Graph() {
                             onChange={(e) => {
                                 let val = (e.target.value);
                                 if (!arr.includes('monthly') && !arr.includes('semi-annually') && !arr.includes('annually')) {
-                                    dispatch(setTag({type: 'Tag', payload: val}))
+                                    dispatch(setTag({ type: 'Tag', payload: val }))
                                     setTimePeriodValue(val);
                                 }
                             }}
@@ -141,42 +141,42 @@ function Graph() {
                         </Select>
                     </FormControl>
 
-                    <StyledButton style={{maxHeight: '30px', minHeight: '30px', backgroundColor: "#1976d2", color: "white"}}
-                            className={classes.formControl} variant="contained" onClick={async () => {
-                        await arr.map((props) => {
-                            if (entries.includes(props) === true)
-                                entryValues.push(BU.get(props));
-                        })
-                        setEntryValues(entryValues);
-                        const productData = Product.get(productValue);
-                        let timePeriodValueNew;
-                        timePeriodValueNew = Time.get(timePeriodValue);
-                        let uri = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/fault?bu=' + entryValues + '&prod=' + productData + '&time=' + timePeriodValueNew;
-                        const response = await axios.get(uri);
-                        responseBody = response.data;
-                        const res = responseBody.faultDetails.map((props) => {
-                            return {
-                                label: props.label,
-                                unitsAllocated: props.unitsAllocated,
-                                faultyUnits: props.faultyUnits
-                            };
-                        });
-                        dispatch(setInitialData({type: "Initial", payload: res}));
+                    <StyledButton style={{ maxHeight: '30px', minHeight: '30px', backgroundColor: "#207a87", color: "white" }}
+                        className={classes.formControl} variant="contained" onClick={async () => {
+                            await arr.map((props) => {
+                                if (entries.includes(props) === true)
+                                    entryValues.push(BU.get(props));
+                            })
+                            setEntryValues(entryValues);
+                            const productData = Product.get(productValue);
+                            let timePeriodValueNew;
+                            timePeriodValueNew = Time.get(timePeriodValue);
+                            let uri = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/fault?bu=' + entryValues + '&prod=' + productData + '&time=' + timePeriodValueNew;
+                            const response = await axios.get(uri);
+                            responseBody = response.data;
+                            const res = responseBody.faultDetails.map((props) => {
+                                return {
+                                    label: props.label,
+                                    unitsAllocated: props.unitsAllocated,
+                                    faultyUnits: props.faultyUnits
+                                };
+                            });
+                            dispatch(setInitialData({ type: "Initial", payload: res }));
 
-                    }}>Submit
-                    </StyledButton><br/>
+                        }}>Submit
+                    </StyledButton><br />
 
                     <TagsInput onChange={(e) => {
-                        dispatch(setTag({type: 'Filter', payload: " ", arr: e}))
-                    }} value={arr}/>
+                        dispatch(setTag({ type: 'Filter', payload: " ", arr: e }))
+                    }} value={arr} />
                 </Row>
                 <BarChart width={700} height={400} data={data}>
-                    <XAxis dataKey="label" stroke="#8884d8"/>
-                    <YAxis/>
-                    <Tooltip wrapperStyle={{width: 180, backgroundColor: '#ccc'}}/>
-                    <Legend verticalAlign="top" wrapperStyle={{lineHeight: '40px'}}/>
-                    <ReferenceLine y={0} stroke='#000'/>
-                    <Brush dataKey='label' height={30} stroke="#8884d8"/>
+                    <XAxis dataKey="label" stroke="#60d5a8" />
+                    <YAxis />
+                    <Tooltip wrapperStyle={{ width: 180, backgroundColor: '#ccc' }} />
+                    <Legend verticalAlign="top" wrapperStyle={{ lineHeight: '40px' }} />
+                    <ReferenceLine y={0} stroke='#000' />
+                    <Brush dataKey='label' height={30} stroke="#60d5a8" />
                     <Bar onClick={async (e) => {
                         let start, end, year;
                         let str1 = (e.label).split('-')
@@ -201,7 +201,7 @@ function Graph() {
                         let pageURL = '/faultdetails/' + entryValue + '/' + productData + '/' + start + '/' + end + '/' + year;
                         history.push(pageURL);
 
-                    }} stackId={'a'} dataKey="unitsAllocated" fill="#1976d2" barSize={30}/>
+                    }} stackId={'a'} dataKey="unitsAllocated" fill="#207a87" barSize={30} />
                     <Bar onClick={async (e) => {
                         let start, end, year;
                         let str1 = (e.label).split('-')
@@ -225,7 +225,7 @@ function Graph() {
                             productData = 3;
                         let pageURL = '/faultdetails/' + entryValue + '/' + productData + '/' + start + '/' + end + '/' + year;
                         history.push(pageURL);
-                    }} dataKey="faultyUnits" fill="#388e3c" barSize={30}/>
+                    }} dataKey="faultyUnits" fill="#60d5a8" barSize={30} />
                 </BarChart>
             </Row>
 
