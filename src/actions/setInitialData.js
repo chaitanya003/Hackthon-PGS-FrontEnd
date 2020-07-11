@@ -1,9 +1,7 @@
-import React from "react";
-
-const setInitialData=(props)=>{
-    return{
-        type:props.type,
-        payload:props.payload
+const setInitialData = (props) => {
+    return {
+        type: props.type,
+        payload: props.payload
     }
 }
 

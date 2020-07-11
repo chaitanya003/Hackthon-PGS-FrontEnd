@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Brush, ReferenceLine} from 'recharts';
+import {Bar, BarChart, Brush, Legend, ReferenceLine, Tooltip, XAxis, YAxis} from 'recharts';
 import {Row} from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import TagsInput from "react-tagsinput";
@@ -11,6 +11,7 @@ import setInitialData from "./actions/setInitialData";
 import {useHistory} from 'react-router-dom';
 import {FormControl, InputLabel, Select, MenuItem, Button} from "@material-ui/core";
 import { makeStyles,withStyles } from '@material-ui/core/styles';
+
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(2),
@@ -36,8 +37,6 @@ const useStyles = makeStyles((theme) => ({
 function Graph() {
     const classes = useStyles();
     const history = useHistory();
-    const [flag1, setFlag1] = useState(false);
-    const [flag2, setFlag2] = useState(false);
     const [productValue, setProductValue] = useState("");
     const [timePeriodValue, setTimePeriodValue] = useState("");
     let entryValues = [];
@@ -48,28 +47,26 @@ function Graph() {
     const Time = new Map([["monthly", "1"], ["semi-annually", "2"], ["annually", "3"]]);
     let responseBody = [];
     const dispatch = useDispatch();
-    let defaultBU;
     useEffect(() => {
         async function f() {
-            defaultBU = [1, 2, 3, 4, 5];
+            const defaultBU = [1, 2, 3, 4, 5];
             const defaultProduct = 3;
             const defaultTimePeriod = "1";
             let uri = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/fault?bu=' + defaultBU + '&prod=' + defaultProduct + '&time=' + defaultTimePeriod;
-            await axios.get(uri).then(res => responseBody = (res.data));
+            const response = await axios.get(uri);
+            responseBody = response.data;
         }
 
         f().then(() => {
             console.log(responseBody);
-            responseBody.faultDetails.map((props) => {
-                let obj = {
+            const res = responseBody.faultDetails.map((props) => {
+                return {
                     label: props.label,
                     unitsAllocated: props.unitsAllocated,
                     faultyUnits: props.faultyUnits
-                }
-                // dispatch(setInitialData({type:'euu'}));
-                dispatch(setInitialData({type: 'Initial', payload: obj}))
-                return 1;
+                };
             });
+            dispatch(setInitialData({type: "Initial", payload: res}))
         });
 
     }, []);
@@ -78,8 +75,8 @@ function Graph() {
     let data;
     let tag = useSelector(state => state.tagReducer);
     tag.map((props) => arr.push(props.tag));
-
     data = useSelector(state => state.initialDataReducer);
+
     return (
 
         <div>
@@ -92,8 +89,7 @@ function Graph() {
                             id={"businessUnits"}
                             onChange={(e) => {
                                 let val = (e.target.value);
-                                if(!arr.includes(val)) {
-                                    console.log("Set Values = ",arr);
+                                if (!arr.includes(val)) {
                                     dispatch(setTag({type: 'Tag', payload: val}))
 
                                 }
@@ -113,9 +109,8 @@ function Graph() {
                             id={"products"}
                             onChange={(e) => {
                                 let val = (e.target.value);
-                                if (flag1 === false) {
+                                if (!arr.includes('Keyboard') && !arr.includes('Monitor') && !arr.includes('Laptop') && !arr.includes('Mouse')) {
                                     dispatch(setTag({type: 'Tag', payload: val}))
-                                    setFlag1(true);
                                     setProductValue(val);
                                 }
 
@@ -134,9 +129,8 @@ function Graph() {
                             id="timePlan"
                             onChange={(e) => {
                                 let val = (e.target.value);
-                                if (flag2 === false) {
+                                if (!arr.includes('monthly') && !arr.includes('semi-annually') && !arr.includes('annually')) {
                                     dispatch(setTag({type: 'Tag', payload: val}))
-                                    setFlag2(true);
                                     setTimePeriodValue(val);
                                 }
                             }}
@@ -149,68 +143,63 @@ function Graph() {
 
                     <StyledButton style={{maxHeight: '30px', minHeight: '30px', backgroundColor: "#1976d2", color: "white"}}
                             className={classes.formControl} variant="contained" onClick={async () => {
-                        entryValues = arr.map((props) => {
+                        await arr.map((props) => {
                             if (entries.includes(props) === true)
-                                return BU.get(props);
+                                entryValues.push(BU.get(props));
                         })
                         setEntryValues(entryValues);
                         const productData = Product.get(productValue);
                         let timePeriodValueNew;
                         timePeriodValueNew = Time.get(timePeriodValue);
-                        console.log("Time Period =", timePeriodValue);
-
                         let uri = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/fault?bu=' + entryValues + '&prod=' + productData + '&time=' + timePeriodValueNew;
-                        await axios.get(uri).then(res => responseBody = (res.data));
-
-                        await responseBody.faultDetails.map((props) => {
-                            let obj = {
+                        const response = await axios.get(uri);
+                        responseBody = response.data;
+                        const res = responseBody.faultDetails.map((props) => {
+                            return {
                                 label: props.label,
                                 unitsAllocated: props.unitsAllocated,
                                 faultyUnits: props.faultyUnits
-                            }
-                            dispatch(setInitialData({type: 'After', payload: obj}))
+                            };
                         });
+                        dispatch(setInitialData({type: "Initial", payload: res}));
 
-                }}>Submit
-                </StyledButton>
-            
-                <TagsInput onChange={(e) => {
-                    dispatch(setTag({type: 'Filter', payload: " ", arr: e}))
-                    setFlag2(false);
-                    setFlag1(false);
-                }} value={arr}/>
-            </Row>
-            <BarChart width={700} height={400} data={data} >
-                <XAxis dataKey="label" stroke="#8884d8"/>
-                <YAxis/>
-                <Tooltip wrapperStyle={{width: 180, backgroundColor: '#ccc'}}/>
-                <Legend verticalAlign="top" wrapperStyle={{lineHeight: '40px'}}/>
-                <ReferenceLine y={0} stroke='#000'/>
-                <Brush dataKey='label' height={30} stroke="#8884d8"/>
-                <Bar onClick={async (e) => {
-                    let start, end, year;
-                    let str1 = (e.label).split('-')
-                    if (str1.length === 1) {
-                        start = str1[0].split(" ");
-                        year = start[1];
-                        start = start[0];
-                        end = start;
-                    } else {
-                        start = str1[0];
-                        end = str1[1].split(" ");
-                        year = end[1];
-                        end = end[0];
-                    }
-                    console.log("Entry Values= ", entryValue);
-                    if(entryValue.length===0)
-                    { entryValue=[1,2,3,4,5];}
-                    console.log("Product Value= ", productValue);
-                    let productData = Product.get(productValue);
-                    if(productData===undefined)
-                        productData=3;
-                    console.log("Product Data= ", productData);
-                    let pageURL = '/faultdetails/' + entryValue + '/' + productData + '/' + start + '/' + end + '/' + year;
-                    history.push(pageURL);
+                    }}>Submit
+                    </StyledButton><br/>
+
+                    <TagsInput onChange={(e) => {
+                        dispatch(setTag({type: 'Filter', payload: " ", arr: e}))
+                    }} value={arr}/>
+                </Row>
+                <BarChart width={700} height={400} data={data}>
+                    <XAxis dataKey="label" stroke="#8884d8"/>
+                    <YAxis/>
+                    <Tooltip wrapperStyle={{width: 180, backgroundColor: '#ccc'}}/>
+                    <Legend verticalAlign="top" wrapperStyle={{lineHeight: '40px'}}/>
+                    <ReferenceLine y={0} stroke='#000'/>
+                    <Brush dataKey='label' height={30} stroke="#8884d8"/>
+                    <Bar onClick={async (e) => {
+                        let start, end, year;
+                        let str1 = (e.label).split('-')
+                        if (str1.length === 1) {
+                            start = str1[0].split(" ");
+                            year = start[1];
+                            start = start[0];
+                            end = start;
+                        } else {
+                            start = str1[0];
+                            end = str1[1].split(" ");
+                            year = end[1];
+                            end = end[0];
+                        }
+                        if (entryValue.length === 0) {
+                            entryValue = [1, 2, 3, 4, 5];
+                        }
+                        console.log("Product Value= ", productValue);
+                        let productData = Product.get(productValue);
+                        if (productData === undefined)
+                            productData = 3;
+                        let pageURL = '/faultdetails/' + entryValue + '/' + productData + '/' + start + '/' + end + '/' + year;
+                        history.push(pageURL);
 
                     }} stackId={'a'} dataKey="unitsAllocated" fill="#1976d2" barSize={30}/>
                     <Bar onClick={async (e) => {
@@ -227,14 +216,13 @@ function Graph() {
                             year = end[1];
                             end = end[0];
                         }
-                        console.log("Entry Values= ", entryValue);
-                        if(entryValue.length===0)
-                        { entryValue=[1,2,3,4,5];}
-                        console.log("Product Value= ", productValue);
+
+                        if (entryValue.length === 0) {
+                            entryValue = [1, 2, 3, 4, 5];
+                        }
                         let productData = Product.get(productValue);
-                        if(productData===undefined)
-                            productData=3;
-                        console.log("Product Data= ", productData);
+                        if (productData === undefined)
+                            productData = 3;
                         let pageURL = '/faultdetails/' + entryValue + '/' + productData + '/' + start + '/' + end + '/' + year;
                         history.push(pageURL);
                     }} dataKey="faultyUnits" fill="#388e3c" barSize={30}/>
@@ -248,6 +236,3 @@ function Graph() {
 }
 
 export default Graph;
-
-
-///discuss some doubts first about the  url for details of table and response and accordingly dispatch the action / /

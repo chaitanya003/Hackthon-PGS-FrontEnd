@@ -24,7 +24,7 @@ function DataDetails(props) {
             let start = props.match.params.start;
             let end = props.match.params.end;
             let year = props.match.params.year;
-            let uri = '/asset/allocation/fault/details?bu=' + entryValue + '&prod=' + productData + '&start=' + start + '&end=' + end + '&year=' + year;
+            let uri = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/fault/details?bu=' + entryValue + '&prod=' + productData + '&start=' + start + '&end=' + end + '&year=' + year;
             console.log("URI= ", uri);
             response = await axios.get(uri)
         }
