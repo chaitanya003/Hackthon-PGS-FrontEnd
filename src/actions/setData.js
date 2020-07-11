@@ -1,11 +1,9 @@
-import React from "react";
+const setData = (props) => {
 
-const setData=(props)=>{
+    return {
 
-    return{
-
-        type:"setData",
-        payload:props.payload
+        type: "setData",
+        payload: props.payload
     }
 
 }

@@ -42,14 +42,11 @@ class App extends React.Component {
           loading: false,
         })
       })
-      .catch((err) => {
+      .catch(() => {
         console.log("Error")
       })
   }
 
-
-
-  
   render() {
 
     const StyledButton = withStyles({
@@ -80,12 +77,13 @@ class App extends React.Component {
         textTransform: 'capitalize',
     },
 })(Button);
-  
+
     const store=createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
     if(this.state.loading === true){
       return <LinearProgress/>
     }
     return (
+        <Provider store={store}>
       <div style={{ backgroundColor: "#e1f5fe" }}>
           <Navbar />
           <Grid container style={{ marginTop: "20px", paddingLeft: 10}} spacing={2}>
@@ -102,9 +100,8 @@ class App extends React.Component {
                 <Card variant="outlined">
                   <CardContent>
                     <Typography variant="h6"><FeedbackIcon/> FAULT RATIO</Typography>
-                    <Provider store={store}>
+
                       <FaultGraph />
-                    </Provider>
                   </CardContent>
                 </Card>
               </Grid>
@@ -125,6 +122,8 @@ class App extends React.Component {
             </Grid>
           </Grid>
       </div>
+        </Provider>
+
     );
   }
 }

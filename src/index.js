@@ -14,17 +14,18 @@ import allReducers from "./reducers";
 
 const  store=createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 const routing = (
+    <Provider store={store}>
   <Router>
     <Switch>
       <Route exact path="/" component={App}/>
       <Route exact path="/survey/:id/:date" component={Survey}/>
       <Route exact path="/asset/:store" component={AssetStore}/>
       <Route exact path="/tracker" component={Tracker}/>
-      <Provider store={store}>
         <Route exact path="/faultdetails" component={FaultDetail}/>
-      </Provider>
     </Switch>
   </Router>
+    </Provider>
+
 )
 ReactDOM.render(routing, document.getElementById('root'));
 
