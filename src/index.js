@@ -5,6 +5,7 @@ import App from './App';
 import Survey from './components/Survey';
 import AssetStore from './components/AssetStore';
 import FaultDetail from './DataDetails';
+import Tracker from './components/tracker';
 import * as serviceWorker from './serviceWorker';
 import {Switch,Route, BrowserRouter as Router} from 'react-router-dom'
 import {createStore} from "redux";
@@ -18,6 +19,7 @@ const routing = (
       <Route exact path="/" component={App}/>
       <Route exact path="/survey/:id/:date" component={Survey}/>
       <Route exact path="/asset/:store" component={AssetStore}/>
+      <Route exact path="/tracker" component={Tracker}/>
       <Provider store={store}>
         <Route exact path="/faultdetails" component={FaultDetail}/>
       </Provider>

@@ -5,6 +5,8 @@ import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from 'axios';
 import Navbar from './navbar';
+import {withStyles } from '@material-ui/core/styles';
+
 const columns = [
   {
     name: 'Asset Id',
@@ -181,6 +183,22 @@ const FilterComponent = ({ filterText, filterBy ,onFilter, onClear, handleFilter
         filterdata = this.state.data.filter(item => item.employeeName && item.employeeName.toLowerCase().includes(this.state.filterText.toLowerCase()));        
       else if(this.state.filterBy === "employeeEmail")
         filterdata = this.state.data.filter(item => item.employeeEmail && item.employeeEmail.toLowerCase().includes(this.state.filterText.toLowerCase()));        
+
+      const StyledButton = withStyles({
+        root: {
+            background: 'linear-gradient(45deg, #2196f3 30%, #0d47a1 90%)',
+            borderRadius: 3,
+            border: 0,
+            color: 'white',
+            height: 40,
+            padding: '0 30px',
+            boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        },
+        label: {
+            textTransform: 'capitalize',
+        },
+    })(Button);
+    
         return (
             <div style={{backgroundColor:"#eeeeee"}}> 
             <Navbar/>
@@ -197,7 +215,7 @@ const FilterComponent = ({ filterText, filterBy ,onFilter, onClear, handleFilter
                 (
                   <>
                   <FilterComponent style={{float:"right"}} onFilter={this.handleFilter} handleFilterBy={this.handleFilterBy} onClear={this.handleClear} filterText={this.state.filterText} filterBy={this.state.filterBy}/>
-                  <Button  style={{float:"right", margin:"10px", backgroundColor:"#386e3c", color:"white"}}  size="large" variant="contained" onClick={this.downloadCSV}>Export</Button>
+                  <StyledButton  style={{float:"right", margin:"10px", backgroundColor:"#1976d2", color:"white"}}  variant="contained" onClick={this.downloadCSV}>Export</StyledButton>
                   </>
                 )
               }

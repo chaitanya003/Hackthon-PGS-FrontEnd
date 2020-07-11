@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Grid, Card, CardContent, Typography, LinearProgress } from '@material-ui/core'
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import PieChartIcon from '@material-ui/icons/PieChart';
 import StoreIcon from '@material-ui/icons/Store';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import Navbar from './components/navbar'
@@ -45,9 +47,40 @@ class App extends React.Component {
       })
   }
 
+
+
+  
   render() {
 
-
+    const StyledButton = withStyles({
+      root: {
+          background: 'linear-gradient(45deg, #2196f3 30%, #0d47a1 90%)',
+          borderRadius: 3,
+          border: 0,
+          color: 'white',
+          height: 40,
+          padding: '0 30px',
+          boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      },
+      label: {
+          textTransform: 'capitalize',
+      },
+  })(Button);
+  const StyledButton1 = withStyles({
+    root: {
+        background: 'linear-gradient(45deg, #4caf50 30%, #1b5e20 90%)',
+        borderRadius: 3,
+        border: 0,
+        color: 'white',
+        height: 40,
+        padding: '0 30px',
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    },
+    label: {
+        textTransform: 'capitalize',
+    },
+})(Button);
+  
     const store=createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
     if(this.state.loading === true){
       return <LinearProgress/>
@@ -55,12 +88,12 @@ class App extends React.Component {
     return (
       <div style={{ backgroundColor: "#e1f5fe" }}>
           <Navbar />
-          <Grid container style={{ marginTop: "30px" }} spacing={2}>
+          <Grid container style={{ marginTop: "20px", paddingLeft: 10}} spacing={2}>
             <Grid item xs={8} container direction="column" spacing={2}>
-              <Grid item >
+              <Grid item>
                 <Card variant="outlined" >
                   <CardContent>
-                    <Typography variant="h4"><BarChartIcon /> Allocation </Typography>
+                    <Typography variant="h6"><PieChartIcon /> ALLOCATION </Typography>
                     <Allocation value ={ this.state.data} />
                   </CardContent>
                 </Card>
@@ -68,7 +101,7 @@ class App extends React.Component {
               <Grid item>
                 <Card variant="outlined">
                   <CardContent>
-                    <Typography variant="h4"><FeedbackIcon/> Fault Ratio</Typography>
+                    <Typography variant="h6"><FeedbackIcon/> FAULT RATIO</Typography>
                     <Provider store={store}>
                       <FaultGraph />
                     </Provider>
@@ -77,10 +110,10 @@ class App extends React.Component {
               </Grid>
             </Grid>
             <Grid item xs={4} container direction="column" spacing={2} >
-              <Grid item >
+              <Grid item>
                 <Card variant="outlined">
                   <CardContent>
-                    <Typography variant="h6"><StoreIcon /> Asset Store  <Link to="/asset/0" style={{ color: 'inherit', textDecoration: 'inherit' }}><Button variant="contained" style={{backgroundColor:"#1976d2", color:"white"}} size="small">IP Devices</Button></Link> <Link to="/asset/1" style={{ color: 'inherit', textDecoration: 'inherit' }}><Button variant="contained" color="secondary" size="small">Non IP Devices</Button></Link></Typography>
+                    <Typography variant="h6"><StoreIcon /> ASSET STORE  <Link to="/asset/0" style={{ color: 'inherit', textDecoration: 'inherit' }}><StyledButton1 variant="contained" style={{backgroundColor:"#1976d2", color:"white"}} size="small">IP DEVICES</StyledButton1></Link> <Link to="/asset/1" style={{ color: 'inherit', textDecoration: 'inherit' }}><StyledButton variant="contained" color="secondary" size="small">Non IP DEVICES</StyledButton></Link></Typography>
                   </CardContent>
                 </Card>
               </Grid>
