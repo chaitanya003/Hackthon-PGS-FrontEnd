@@ -9,8 +9,22 @@ import Navbar from './components/navbar'
 import { Card, Select, MenuItem, Button, FormControl, InputLabel, TextField } from '@material-ui/core'
 import * as axios from "axios";
 import setData from "./actions/setData";
+import {withStyles} from "@material-ui/core/styles" 
 
-
+const StyledButton = withStyles({
+    root: {
+      background: 'linear-gradient(45deg, #2196f3 30%, #0d47a1 90%)',
+      borderRadius: 3,
+      border: 0,
+      color: 'white',
+      height: 40,
+      padding: '0 30px',
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    },
+    label: {
+      textTransform: 'capitalize',
+    },
+  })(Button);
 
 const FilterComponent = ({ filterText, filterBy, onFilter, onClear, handleFilterBy }) => (
     <>
@@ -31,7 +45,7 @@ const FilterComponent = ({ filterText, filterBy, onFilter, onClear, handleFilter
                 <MenuItem value="faultDate">Fault Date</MenuItem>
             </Select>
         </FormControl>
-        <Button type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>Clear</Button>
+        <StyledButton type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>Clear</StyledButton>
     </>
 );
 
@@ -130,7 +144,7 @@ function DataDetails(props) {
 
         <div style={{ backgroundColor: "#e3f2fd" }}>
             <Navbar />
-            <Card style={{ margin: "70px" }} elevation={10}>
+            <Card style={{ margin: "5%" }} elevation={10}>
                 <DataTable
                     title={" Fault Details"}
                     columns={columns}

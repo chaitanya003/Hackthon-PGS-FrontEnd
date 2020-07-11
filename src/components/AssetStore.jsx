@@ -5,6 +5,8 @@ import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from 'axios';
 import Navbar from './navbar';
+import { withStyles } from '@material-ui/core/styles';
+
 const columns = [
   {
     name: 'Asset Id',
@@ -43,6 +45,21 @@ const columns = [
   },
 ];
 
+const StyledButton = withStyles({
+  root: {
+    background: 'linear-gradient(45deg, #2196f3 30%, #0d47a1 90%)',
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    height: 40,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+})(Button);
+
 const FilterComponent = ({ filterText, filterBy, onFilter, onClear, handleFilterBy }) => (
   <>
     <TextField variant="outlined" style={{ margin: "10px" }} id="search" type="text" placeholder="Filter" value={filterText} onChange={onFilter} />
@@ -60,7 +77,7 @@ const FilterComponent = ({ filterText, filterBy, onFilter, onClear, handleFilter
         <MenuItem value="status">Status</MenuItem>
       </Select>
     </FormControl>
-    <Button type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>Clear</Button>
+    <StyledButton type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>Clear</StyledButton>
   </>
 );
 
@@ -138,7 +155,7 @@ class AssetStore extends React.Component {
     return (
       <div style={{ backgroundColor: "#e1f5fe" }}>
         <Navbar />
-        <Card style={{ margin: "70px" }} elevation={10}>
+        <Card style={{ margin: "5%" }} elevation={10}>
 
           <DataTable
             title={this.state.title}

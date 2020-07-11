@@ -47,14 +47,14 @@ class Survey extends React.Component {
         }
         return (
             <>
-                <Grid item >
+                <div>
                     <Typography variant="h6"><RateReviewIcon /> CURRENT SURVEY STATUS</Typography>
                     <Donut value={this.state.donutData} Id={this.state.currentSurveyID} date={this.state.currentSurveyDate} />
-                </Grid>
-                <Grid item>
+                </div>
+                <div>
                     <Typography variant="h6"><ThumbsUpDownIcon /> PAST SURVEY'S TURNOUT</Typography>
                     <PastSurvey value={this.state.pastData} />
-                </Grid>
+                </div>
             </>
         )
     }

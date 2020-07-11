@@ -54,8 +54,7 @@ class App extends React.Component {
         borderRadius: 3,
         border: 0,
         color: 'white',
-        height: 40,
-        padding: '0 30px',
+        fontSize:"small",
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
       },
       label: {
@@ -68,8 +67,7 @@ class App extends React.Component {
         borderRadius: 3,
         border: 0,
         color: 'white',
-        height: 40,
-        padding: '0 30px',
+        fontSize:"small",
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
       },
       label: {
@@ -85,8 +83,8 @@ class App extends React.Component {
       <Provider store={store}>
         <div style={{ backgroundColor: "#e3f2fd" }}>
           <Navbar />
-          <Grid container style={{ marginTop: "20px", paddingLeft: 15 }} spacing={2}>
-            <Grid item xs={8} container direction="column" spacing={2}>
+          <Grid container xs = {12} spacing={1} style={{marginTop:"1%"}}>
+            <Grid item xs={8} container direction="column" spacing={1}>
               <Grid item>
                 <Card variant="outlined" >
                   <CardContent>
@@ -105,19 +103,21 @@ class App extends React.Component {
                 </Card>
               </Grid>
             </Grid>
-            <Grid item xs={4} container direction="column" spacing={2} >
-              <Grid item>
-                <Card variant="outlined">
-                  <CardContent>
-                    <Typography variant="h6"><StoreIcon /> ASSET STORE  <Link to="/asset/0" style={{ color: 'inherit', textDecoration: 'inherit' }}><StyledButton1 variant="contained" style={{ backgroundColor: "#1976d2", color: "white" }} size="small">IP DEVICES</StyledButton1></Link> <Link to="/asset/1" style={{ color: 'inherit', textDecoration: 'inherit' }}><StyledButton variant="contained" color="secondary" size="small">Non IP DEVICES</StyledButton></Link></Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Card variant="outlined" style={{ maxHeight: "100%" }}>
-                <CardContent>
-                  <Survey />
-                </CardContent>
-              </Card>
+            <Grid item xs={4} container direction="column">
+                <Grid>
+                  <Card variant="outlined">
+                    <CardContent>
+                      <Typography variant="h6"><StoreIcon /> ASSET STORE  <Link to="/asset/0" style={{ color: 'inherit', textDecoration: 'inherit', marginLeft:"3%" }}><StyledButton variant="contained" style={{ backgroundColor: "#1976d2", color: "white" }} size="small">IP DEVICES</StyledButton></Link> <Link to="/asset/1" style={{ color: 'inherit', textDecoration: 'inherit', marginLeft:"3%"}}><StyledButton1 variant="contained" color="secondary" size="small">Non IP DEVICES</StyledButton1></Link></Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid>
+                  <Card variant="outlined" >
+                    <CardContent>
+                      <Survey />
+                    </CardContent>
+                  </Card>
+                </Grid>
             </Grid>
           </Grid>
         </div>

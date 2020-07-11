@@ -54,11 +54,11 @@ class PastSurvey extends Component {
         />
         <center>
           <BarChart
-            width={420}
+            width={400}
             height={380}
             data={this.state.data}
             layout="vertical"
-            margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
+            margin={{ top: 30, right: 20, left: 30, bottom: 30 }}
             onClick={this.handleClick}
           >
             <XAxis type="number" height={50} />
@@ -85,11 +85,11 @@ class PastSurvey extends Component {
           />
           <center>
             <BarChart
-              width={420}
+              width={400}
               height={380}
               data={this.state.data}
               layout="vertical"
-              margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
+              margin={{ top: 30, right: 20, left: 30, bottom: 30 }}
               onClick={this.handleClick}
             >
               <XAxis type="number" height={50} />

@@ -95,14 +95,14 @@ export default class allocationPie extends Component {
 	render() {
 		return (
 			<div style={{ display: "flex", flexDirection: "row" }}>
-				<Card variant="outlined" style={{ margin: 5 }}>
-					<CardHeader title="BUSINESS UNIT" style={{ height: "15px", textAlign: 'center', backgroundColor: '#f5f5f5' }} />
+				<Card variant="outlined" style={{marginRight:"1%", marginLeft:"1%"}}>
+					<CardHeader title="BUSINESS UNIT" style={{ textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 					<Divider />
 					<CardContent style={{ backgroundColor: '#fafafa' }}>
-						<PieChart width={400} height={350}>
+						<PieChart width={350} height={350}>
 							<Pie
 								data={this.state.data}
-								cx={100}
+								cx={40}
 								cy={120}
 								labelLine={false}
 								label={renderCustomizedLabel}
@@ -124,18 +124,18 @@ export default class allocationPie extends Component {
 						</PieChart>
 					</CardContent>
 				</Card>
-				<Card variant="outlined" style={{ margin: 5 }}>
+				<Card variant="outlined" >
 					{
-						this.state.subdata === null && <div><CardHeader title="SUB BUSINESS UNIT" style={{ height: "15px", textAlign: 'center', backgroundColor: '#f5f5f5' }} />
+						this.state.subdata === null && <div><CardHeader title="SUB BUSINESS UNIT" style={{textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 							<Divider /><Typography style={{ margin: 100, textAlign: 'center', color: '#1b5e20', fontFamily: 'Lucida Console' }}>Click on the BU to get more insights about it.</Typography></div>
 					}
-					{this.state.subdata !== null && <div><CardHeader title="SUB BUSINESS UNIT" style={{ height: "15px", textAlign: 'center', backgroundColor: '#f5f5f5' }} />
+					{this.state.subdata !== null && <div><CardHeader title="SUB BUSINESS UNIT" style={{  textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 						<Divider />
 						<CardContent style={{ backgroundColor: '#fafafa' }}>
-							<PieChart width={400} height={350}>
+							<PieChart width={350} height={350}>
 								<Pie
 									data={this.state.subdata}
-									cx={200}
+									cx={100}
 									cy={120}
 									labelLine={false}
 									label={renderCustomizedLabel}
@@ -148,7 +148,7 @@ export default class allocationPie extends Component {
 									}
 								</Pie>
 								<Tooltip />
-								<Legend iconType="wye" layout="vertical" align='right' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
+								<Legend iconType="wye" layout="vertical" align='left' verticalAlign="bottom" wrapperStyle={{ fontSize: "10px" }} />
 							</PieChart>
 						</CardContent>
 					</div>
