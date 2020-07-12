@@ -96,7 +96,7 @@ export default class allocationPie extends Component {
 		return (
 			<div style={{ display: "flex", flexDirection: "row" }}>
 				<Card variant="outlined" style={{marginRight:"1%", marginLeft:"1%"}}>
-					<CardHeader title="BUSINESS UNIT" style={{ textAlign: 'center', backgroundColor: '#f5f5f5' }} />
+					<CardHeader title="BUSINESS UNIT" titleTypographyProps={{variant:'h6'}} style={{ textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 					<Divider />
 					<CardContent style={{ backgroundColor: '#fafafa' }}>
 						<PieChart width={350} height={350}>
@@ -126,10 +126,10 @@ export default class allocationPie extends Component {
 				</Card>
 				<Card variant="outlined" >
 					{
-						this.state.subdata === null && <div><CardHeader title="SUB BUSINESS UNIT" style={{textAlign: 'center', backgroundColor: '#f5f5f5' }} />
+						this.state.subdata === null && <div><CardHeader title="SUB BUSINESS UNIT" titleTypographyProps={{variant:'h6'}} style={{textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 							<Divider /><Typography style={{ margin: 100, textAlign: 'center', color: '#1b5e20', fontFamily: 'Lucida Console' }}>Click on the BU to get more insights about it.</Typography></div>
 					}
-					{this.state.subdata !== null && <div><CardHeader title="SUB BUSINESS UNIT" style={{  textAlign: 'center', backgroundColor: '#f5f5f5' }} />
+					{this.state.subdata !== null && <div><CardHeader title="SUB BUSINESS UNIT" titleTypographyProps={{variant:'h6'}} style={{  textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 						<Divider />
 						<CardContent style={{ backgroundColor: '#fafafa' }}>
 							<PieChart width={350} height={350}>

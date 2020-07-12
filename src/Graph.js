@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Bar, BarChart, Brush, Legend, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, Brush, Legend, ReferenceLine, Tooltip, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { Row } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import TagsInput from "react-tagsinput";
@@ -170,7 +170,8 @@ function Graph() {
                         dispatch(setTag({ type: 'Filter', payload: " ", arr: e }))
                     }} value={arr} />
                 </Row>
-                <BarChart width={700} height={400} data={data}>
+                <ResponsiveContainer width="90%" height={400}>
+                <BarChart data={data}>
                     <XAxis dataKey="label" stroke="#60d5a8" />
                     <YAxis />
                     <Tooltip wrapperStyle={{ width: 180, backgroundColor: '#ccc' }} />
@@ -227,6 +228,7 @@ function Graph() {
                         history.push(pageURL);
                     }} dataKey="faultyUnits" fill="#60d5a8" barSize={30} />
                 </BarChart>
+                </ResponsiveContainer>
             </Row>
 
         </div>
