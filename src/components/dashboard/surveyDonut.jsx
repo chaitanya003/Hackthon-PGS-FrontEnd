@@ -74,7 +74,7 @@ class SurveyDonut extends Component {
   };
 
   handleClick = (data, index) => {
-    if (data.name === "Not responded") {
+    if (data.name === "Not Responded") {
       let url = "/survey/" + this.props.Id + "/" + this.props.date
       this.props.history.push(url)
     }

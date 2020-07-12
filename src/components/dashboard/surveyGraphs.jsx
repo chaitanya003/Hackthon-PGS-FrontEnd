@@ -23,11 +23,22 @@ class Survey extends React.Component {
             .then((res) => {
                 let Donut = {
                     overall: [{ name: "Responded", value: res.data[3].totalNumberOfResponse, col: "#207a87" },
-                    { name: "Not responded", value: res.data[3].totalNumberOfNonResponse, col: "#60d5a8" }],
-                    responsetype: [{ name: "+ve Response", value: res.data[3].totalNumberOfPositiveResponses, col: "#207a87" },
-                    { name: "-ve Response", value: res.data[3].totalNumberOfNegativeResponses, col: "#60d5a8" }]
+                    { name: "Not Responded", value: res.data[3].totalNumberOfNonResponse, col: "#60d5a8" }],
+                    responsetype: [{ name: "Confirmed", value: res.data[3].totalNumberOfPositiveResponses, col: "#207a87" },
+                    { name: "Not Confirmed", value: res.data[3].totalNumberOfNegativeResponses, col: "#60d5a8" }]
                 }
                 let Pastarr = res.data.slice(0, 3).reverse()
+                let PastData = Pastarr.map((obj) => {
+                    obj["Percent-Responded"] = obj["percentageOfResponse"]
+                    obj["Percent-Not-Responded"] = obj["percentageOfNonResponse"]
+                    obj["Total-Responded"] = obj["totalNumberOfResponse"]
+                    obj["Total-Not-Responded"] = obj["totalNumberOfNonResponse"]
+                    delete obj["percentageOfResponse"]
+                    delete obj["percentageOfNonResponse"]
+                    delete obj["totalNumberOfResponse"]
+                    delete obj["totalNumberOfNonResponse"]
+                    return obj
+                  })
                 this.setState({
                     currentSurveyID: res.data[3].surveyId,
                     currentSurveyDate: res.data[3].surveyStartDate,
