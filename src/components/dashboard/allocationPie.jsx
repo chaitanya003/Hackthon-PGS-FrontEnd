@@ -127,7 +127,10 @@ export default class allocationPie extends Component {
 				<Card variant="outlined" >
 					{
 						this.state.subdata === null && <div><CardHeader title="SUB BUSINESS UNIT" titleTypographyProps={{variant:'h6'}} style={{textAlign: 'center', backgroundColor: '#f5f5f5' }} />
-							<Divider /><Typography style={{ margin: 100, textAlign: 'center', color: '#1b5e20', fontFamily: 'Lucida Console' }}>Click on the BU to get more insights about it.</Typography></div>
+							<Divider />
+							<CardContent style={{width:"380px", height:"350px"}}>
+								<Typography style={{ margin: 60, textAlign: 'center', color: '#1b5e20', fontFamily: 'Lucida Console' }}>Click on the BU to get more insights about it.</Typography>
+							</CardContent></div>
 					}
 					{this.state.subdata !== null && <div><CardHeader title="SUB BUSINESS UNIT" titleTypographyProps={{variant:'h6'}} style={{  textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 						<Divider />
