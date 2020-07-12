@@ -18,6 +18,7 @@ import Navbar from './navbar';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import ErrorIcon from '@material-ui/icons/Error';
+import { Divider } from '@material-ui/core';
 
 
 const data = new Map([["64", 3], ["65", 5], ["66", 7], ["67", 6], ["68", 5], ["69", 3], ["70", 4], ["71", 3], ["72", 5]]);
@@ -137,7 +138,7 @@ function getSteps() {
 
 export default function CustomizedSteppers() {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(2);
+    const [activeStep, setActiveStep] = React.useState(-1);
     const steps = getSteps();
     let textValue = ''
 
@@ -212,7 +213,7 @@ export default function CustomizedSteppers() {
         <div className={classes.root} style={{ backgroundColor: "#eeeeee" }}>
             <Navbar />
             <Card style={{ margin: "70px" }} elevation={10}>
-                <Card alignItems="right" style={{ margin: 1 }}>
+                <Card alignItems="right" style={{ margin: "20px" }}>
                     <TextField size="medium" id="standard-basic" label="Asset id" onChange={onChange} style={{ margin: 4 }} />
                     <StyledButton
                         variant="contained"
@@ -221,9 +222,10 @@ export default function CustomizedSteppers() {
                         startIcon={<SearchIcon />}
                         onClick={handleDummy}
                     >
-                        Search
+                        SEARCH
       </StyledButton>
                 </Card>
+                <Divider/>
                 <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
                     {steps.map((label) => (
                         <Step key={label}>

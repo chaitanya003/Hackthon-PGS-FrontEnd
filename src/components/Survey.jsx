@@ -76,7 +76,7 @@ const FilterComponent = ({ filterText, filterBy, onFilter, onClear, handleFilter
         <MenuItem value="employeeEmail">EmailID</MenuItem>
       </Select>
     </FormControl>
-    <StyledButton type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>Clear</StyledButton>
+    <StyledButton type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>CLEAR</StyledButton>
   </>
 );
 
@@ -106,7 +106,7 @@ class Survey extends React.Component {
       .then((res) => {
         let title = null
         title = "XYZ"
-        title = <Typography variant="h5">Survey {this.props.match.params.date}</Typography>
+        title = <Typography variant="h6">SURVEY {this.props.match.params.date}</Typography>
         this.setState({
           data: res.data.survey,
           title: title,
@@ -218,7 +218,7 @@ class Survey extends React.Component {
               (
                 <>
                   <FilterComponent style={{ float: "right" }} onFilter={this.handleFilter} handleFilterBy={this.handleFilterBy} onClear={this.handleClear} filterText={this.state.filterText} filterBy={this.state.filterBy} />
-                  <StyledButton style={{ float: "right", margin: "10px", backgroundColor: "#1976d2", color: "white" }} variant="contained" onClick={() => this.downloadCSV(filterdata)}>Export</StyledButton>
+                  <StyledButton style={{ float: "right", margin: "10px", backgroundColor: "#1976d2", color: "white" }} variant="contained" onClick={() => this.downloadCSV(filterdata)}>EXPORT</StyledButton>
                 </>
               )
             }

@@ -163,7 +163,7 @@ function Graph() {
                             });
                             dispatch(setInitialData({ type: "Initial", payload: res }));
 
-                        }}>Submit
+                        }}>SUBMIT
                     </StyledButton><br />
 
                     <TagsInput onChange={(e) => {
