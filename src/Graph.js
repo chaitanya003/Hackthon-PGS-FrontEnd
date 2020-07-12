@@ -62,8 +62,8 @@ function Graph() {
             const res = responseBody.faultDetails.map((props) => {
                 return {
                     label: props.label,
-                    unitsAllocated: props.unitsAllocated,
-                    faultyUnits: props.faultyUnits
+                    "Allocated-Units": props.unitsAllocated,
+                    "Faulty-Units": props.faultyUnits
                 };
             });
             dispatch(setInitialData({ type: "Initial", payload: res }))
@@ -157,8 +157,8 @@ function Graph() {
                             const res = responseBody.faultDetails.map((props) => {
                                 return {
                                     label: props.label,
-                                    unitsAllocated: props.unitsAllocated,
-                                    faultyUnits: props.faultyUnits
+                                    "Allocated-Units": props.unitsAllocated,
+                                    "Faulty-Units": props.faultyUnits
                                 };
                             });
                             dispatch(setInitialData({ type: "Initial", payload: res }));
@@ -202,7 +202,7 @@ function Graph() {
                         let pageURL = '/faultdetails/' + entryValue + '/' + productData + '/' + start + '/' + end + '/' + year;
                         history.push(pageURL);
 
-                    }} stackId={'a'} dataKey="unitsAllocated" fill="#207a87" barSize={30} />
+                    }} stackId={'a'} dataKey="Allocated-Units" fill="#207a87" barSize={30} />
                     <Bar onClick={async (e) => {
                         let start, end, year;
                         let str1 = (e.label).split('-')
@@ -226,7 +226,7 @@ function Graph() {
                             productData = 3;
                         let pageURL = '/faultdetails/' + entryValue + '/' + productData + '/' + start + '/' + end + '/' + year;
                         history.push(pageURL);
-                    }} dataKey="faultyUnits" fill="#60d5a8" barSize={30} />
+                    }} dataKey="Faulty-Units" fill="#60d5a8" barSize={30} />
                 </BarChart>
                 </ResponsiveContainer>
             </Row>
