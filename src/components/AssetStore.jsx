@@ -77,7 +77,7 @@ const FilterComponent = ({ filterText, filterBy, onFilter, onClear, handleFilter
         <MenuItem value="status">Status</MenuItem>
       </Select>
     </FormControl>
-    <StyledButton type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>Clear</StyledButton>
+    <StyledButton type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>CLEAR</StyledButton>
   </>
 );
 
@@ -101,10 +101,10 @@ class AssetStore extends React.Component {
       .then((res) => {
         let title = null
         if (this.props.match.params.store == 0) {
-          title = <Typography variant="h5">Asset Store - IP Devices</Typography>
+          title = <Typography variant="h6">ASSET STORE: IP DEVICES</Typography>
         }
         else {
-          title = <Typography variant="h5">Asset Store - Non IP Devices</Typography>
+          title = <Typography variant="h6">ASSET STORE: NON-IP DEVICES</Typography>
         }
         this.setState({
           data: res.data.assets,

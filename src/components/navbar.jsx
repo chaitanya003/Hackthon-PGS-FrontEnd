@@ -17,20 +17,15 @@ class Navbar extends React.Component {
         return (
             <AppBar position="static" style={{ backgroundColor: "#53bbc9" }}>
                 <Toolbar>
-                    <NavLink to="/" style={{ color: 'inherit', textDecoration: 'inherit' }} >
-                        <IconButton edge="start" color="inherit" aria-label="menu">
-                            PGS
-            </IconButton>
-                    </NavLink>
                     <Typography variant="h6">
                         Principal Global Services
         </Typography>
                     <div className={classes.toolbarButtons}>
                         <NavLink to="/tracker" style={{ fontSize: "large", margin: "10px", color: 'inherit', textDecoration: 'inherit' }}>
-                            Tracker
+                            ASSET TRACKER
         </NavLink>
                         <NavLink to="/" style={{ fontSize: "large", margin: "10px", color: 'inherit', textDecoration: 'inherit' }}>
-                            <b>Home</b>
+                            <b>HOME</b>
                         </NavLink>
                     </div>
                 </Toolbar>

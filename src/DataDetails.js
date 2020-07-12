@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './styles.css';
 import "bootstrap";
 import Navbar from './components/navbar'
-import { Card, Select, MenuItem, Button, FormControl, InputLabel, TextField } from '@material-ui/core'
+import { Card, Select, MenuItem, Button, FormControl, InputLabel, TextField, Typography } from '@material-ui/core'
 import * as axios from "axios";
 import setData from "./actions/setData";
 import {withStyles} from "@material-ui/core/styles" 
@@ -45,7 +45,7 @@ const FilterComponent = ({ filterText, filterBy, onFilter, onClear, handleFilter
                 <MenuItem value="faultDate">Fault Date</MenuItem>
             </Select>
         </FormControl>
-        <StyledButton type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>Clear</StyledButton>
+        <StyledButton type="button" onClick={onClear} size="large" style={{ margin: "10px", backgroundColor: "#1976d2", color: "white" }}>CLEAR</StyledButton>
     </>
 );
 
@@ -146,7 +146,7 @@ function DataDetails(props) {
             <Navbar />
             <Card style={{ margin: "5%" }} elevation={10}>
                 <DataTable
-                    title={" Fault Details"}
+                    title={ <Typography variant="h6">FAULT DETAILS</Typography>}
                     columns={columns}
                     data={filterdata}
                     pagination
