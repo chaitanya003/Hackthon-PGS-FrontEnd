@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import DataTable from "react-data-table-component";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import "reactstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles.css';
 import "bootstrap";
 import Navbar from './components/navbar'
-import { Card, Select, MenuItem, Button, FormControl, InputLabel, TextField, Typography } from '@material-ui/core'
+import {Button, Card, FormControl, InputLabel, MenuItem, Select, TextField, Typography} from '@material-ui/core'
 import * as axios from "axios";
 import setData from "./actions/setData";
-import {withStyles} from "@material-ui/core/styles" 
+import {withStyles} from "@material-ui/core/styles"
 
 const StyledButton = withStyles({
     root: {
@@ -71,10 +71,10 @@ function DataDetails(props) {
         f().then(() => {
             let val = response.data.faultDetails;
             console.log("Value = ", val);
-            dispatch(setData({ payload: val }));
+            dispatch(setData({payload: val}));
         });
 
-    });
+    }, []);
     const columns = [
         {
             name: "Employee Name",
