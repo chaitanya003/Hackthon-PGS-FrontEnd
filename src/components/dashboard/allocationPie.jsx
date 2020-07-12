@@ -31,6 +31,7 @@ export default class allocationPie extends Component {
 		this.state = {
 			data: props.value,
 			subdata: null,
+			selectedBU:null,
 			loading: true,
 		};
 
@@ -41,10 +42,11 @@ export default class allocationPie extends Component {
 
 	}
 
-	request = (buId) => {
+	request = (bu) => {
+		console.log(bu)
 		let apiUrl
-		if (buId) {
-			apiUrl = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/bu?bu_id=' + buId;
+		if (bu.id) {
+			apiUrl = 'http://pgshackathon-env.eba-smftmkmh.us-east-2.elasticbeanstalk.com/asset/allocation/bu?bu_id=' + bu.id;
 			axios.get(apiUrl)
 				.then((response) => {
 					console.log(response)
@@ -58,34 +60,13 @@ export default class allocationPie extends Component {
 					console.log(data)
 					this.setState({
 						subdata: data,
+						selectedBU: bu.name,
 					})
 				})
 				.catch((err) => {
 					console.log("Error")
 				})
-		} else {
-			// apiUrl = '/asset/allocation';
-			// axios.get(apiUrl)
-			// 	.then((response) => {
-			// 		let data = []
-			// 		for (let i in response.data.assets[0].allocation) {
-			// 			let item = {}
-			// 			item.id = response.data.assets[0].allocation[i].buId
-			// 			item.name = response.data.assets[0].allocation[i].buName
-			// 			item.value = response.data.assets[0].allocation[i].unitsAllocation
-			// 			data.push(item)
-			// 		}
-			// 		this.setState({
-			// 			data: data,
-			// 			subdata: data,
-			// 			loading: false,
-			// 		})
-			// 	})
-			// 	.catch((err) => {
-			// 		console.log("Error")
-			// 	})
-
-		}
+		} 
 	}
 
 	onChangeSector(ID) {
@@ -110,7 +91,7 @@ export default class allocationPie extends Component {
 								fill="#8884d8"
 								dataKey="value"
 								onClick={e => {
-									this.onChangeSector(e.id);
+									this.onChangeSector(e);
 								}
 								}
 							>
@@ -132,7 +113,7 @@ export default class allocationPie extends Component {
 								<Typography style={{ margin: 60, textAlign: 'center', color: '#1b5e20', fontFamily: 'Lucida Console' }}>Click on the BU to get more insights about it.</Typography>
 							</CardContent></div>
 					}
-					{this.state.subdata !== null && <div><CardHeader title="SUB BUSINESS UNIT" titleTypographyProps={{variant:'h6'}} style={{  textAlign: 'center', backgroundColor: '#f5f5f5' }} />
+					{this.state.subdata !== null && <div><CardHeader title={this.state.selectedBU} titleTypographyProps={{variant:'h6'}} style={{  textAlign: 'center', backgroundColor: '#f5f5f5' }} />
 						<Divider />
 						<CardContent style={{ backgroundColor: '#fafafa' }}>
 							<PieChart width={350} height={350}>
